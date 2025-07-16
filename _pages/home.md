@@ -8,7 +8,7 @@ permalink: /
 
 We develop systematic defenses, intrusion-detection pipelines, formal verification workflows, and cryptographic protocol enhancements by combining data-driven modeling, program analysis, and zero-knowledge techniques. 
 
-<div markdown="0" id="carousel" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="hover">
+<div markdown="0" id="carousel" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="hover" style="height: 400px; background-color: #fff;">
   <!-- Menu -->
   <ol class="carousel-indicators">
     <li data-target="#carousel" data-slide-to="0" class="active"></li>
