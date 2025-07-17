@@ -19,31 +19,31 @@ We develop systematic defenses, intrusion-detection pipelines, formal verificati
     <li data-target="#carousel" data-slide-to="5"></li>
   </ol>
 
-  <!-- Items -->
+  <!-- Carousel items -->
   <div class="carousel-inner" style="height: 400px; background-color: #fff;" markdown="0">
-    <div class="item active">
+    <div class="item active" style="height: 100%;">
       <img src="{{ site.url }}{{ site.baseurl }}/images/slider7001400/blockchain1.gif" alt="blockchain1"
-           style="object-fit: contain; width: 100%; height: 100%;" />
+           style="max-width: 100%; max-height: 100%; object-fit: contain;" />
     </div>
-    <div class="item">
+    <div class="item text-center" style="height: 100%;">
       <img src="{{ site.url }}{{ site.baseurl }}/images/slider7001400/blockchain2.gif" alt="Slide 2"
-           style="object-fit: contain; width: 100%; height: 100%;" />
+           style="max-width: 100%; max-height: 100%; object-fit: contain;" />
     </div>
-    <div class="item">
+    <div class="item text-center" style="height: 100%;">
       <img src="{{ site.url }}{{ site.baseurl }}/images/slider7001400/AI3.gif" alt="Slide 3"
-           style="object-fit: contain; width: 100%; height: 100%;" />
+           style="max-width: 100%; max-height: 100%; object-fit: contain;" />
     </div>
-    <div class="item">
+    <div class="item text-center" style="height: 100%;">
       <img src="{{ site.url }}{{ site.baseurl }}/images/slider7001400/AI4.gif" alt="Slide 4"
-           style="object-fit: contain; width: 100%; height: 100%;" />
+           style="max-width: 100%; max-height: 100%; object-fit: contain;" />
     </div>
-    <div class="item">
+    <div class="item text-center" style="height: 100%;">
       <img src="{{ site.url }}{{ site.baseurl }}/images/slider7001400/blockchain5.gif" alt="Slide 5"
-           style="object-fit: contain; width: 100%; height: 100%;" />
+           style="max-width: 100%; max-height: 100%; object-fit: contain;" />
     </div>
-    <div class="item">
+    <div class="item text-center" style="height: 100%;">
       <img src="{{ site.url }}{{ site.baseurl }}/images/slider7001400/blockchain6.gif" alt="Slide 6"
-           style="object-fit: contain; width: 100%; height: 100%;" />
+           style="max-width: 100%; max-height: 100%; object-fit: contain;" />
     </div>
   </div>
 
