@@ -20,7 +20,7 @@ We develop systematic defenses, intrusion-detection pipelines, formal verificati
   </ol>
 
   <!-- Carousel items -->
-  <div class="carousel-inner" style="height: 400px; background-color: #fff;" markdown="0">
+  <div class="carousel-inner" style="height: 410px; background-color: #fff;" markdown="0">
     <div class="item active">
       <img src="{{ site.url }}{{ site.baseurl }}/images/slider7001400/blockchain1.gif" alt="blockchain1"
            style="height: 100%; width: 100%; object-fit: contain;" />
