@@ -21,29 +21,29 @@ We develop systematic defenses, intrusion-detection pipelines, formal verificati
 
   <!-- Carousel items -->
   <div class="carousel-inner" style="height: 400px; background-color: #fff;" markdown="0">
-    <div class="item active" style="height: 100%;">
+    <div class="item active">
       <img src="{{ site.url }}{{ site.baseurl }}/images/slider7001400/blockchain1.gif" alt="blockchain1"
-           style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+           style="width: 100%; height: 100%; object-fit: contain;" />
     </div>
     <div class="item text-center" style="height: 100%;">
       <img src="{{ site.url }}{{ site.baseurl }}/images/slider7001400/blockchain2.gif" alt="Slide 2"
-           style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+           style="width: 100%; height: 100%; object-fit: contain;" />
     </div>
     <div class="item text-center" style="height: 100%;">
       <img src="{{ site.url }}{{ site.baseurl }}/images/slider7001400/AI3.gif" alt="Slide 3"
-           style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+           style="width: 100%; height: 100%; object-fit: contain;" />
     </div>
     <div class="item text-center" style="height: 100%;">
       <img src="{{ site.url }}{{ site.baseurl }}/images/slider7001400/AI4.gif" alt="Slide 4"
-           style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+           style="width: 100%; height: 100%; object-fit: contain;" />
     </div>
     <div class="item text-center" style="height: 100%;">
       <img src="{{ site.url }}{{ site.baseurl }}/images/slider7001400/blockchain5.gif" alt="Slide 5"
-           style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+           style="width: 100%; height: 100%; object-fit: contain;" />
     </div>
     <div class="item text-center" style="height: 100%;">
       <img src="{{ site.url }}{{ site.baseurl }}/images/slider7001400/blockchain6.gif" alt="Slide 6"
-           style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+           style="width: 100%; height: 100%; object-fit: contain;" />
     </div>
   </div>
 
