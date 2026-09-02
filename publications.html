@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TITANS Lab - Publications</title>
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div data-include="nav"></div>
+
+<div class="container-fluid page-body">
+
+  <section class="team-section">
+    <h4 id="highlights" class="section-title"><span>Group Highlights</span></h4>
+    <div id="pub-highlights" class="pub-highlight-grid"></div>
+  </section>
+
+  <section class="team-section">
+    <h4 id="patents" class="section-title"><span>Patents</span></h4>
+    <div id="patents-list"></div>
+  </section>
+
+  <section class="team-section">
+    <h4 id="full-list" class="section-title"><span>Full List of Publications</span></h4>
+    <div id="pub-full-list"></div>
+  </section>
+  <section class="venues-cta">
+  <a href="deadlines2026.html" class="venues-cta-card">
+    <div class="venues-cta-icon"><i class="fa fa-calendar-check-o"></i></div>
+    <div class="venues-cta-body">
+      <h4>TITANS Lab &mdash; Preferred Publication Venues</h4>
+      <p>Curated list of conferences with upcoming submission deadlines, tiered and filterable by region.</p>
+    </div>
+    <div class="venues-cta-arrow"><i class="fa fa-arrow-right"></i></div>
+  </a>
+</section>
+
+</div>
+
+<div data-include="footer"></div>
+
+<script src="partials/nav.js"></script>
+<script src="partials/footer.js"></script>
+<script src="data/publist.js"></script>
+<script src="data/patents.js"></script>
+<script src="assets/site.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Publication modal -->
+<div id="pub-modal" class="pub-modal" role="dialog" aria-modal="true">
+  <div class="pub-modal-content"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TITANS Lab — Preferred Publication Venues (2026)</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  :root {
+    /* TITANS Lab palette */
+    --teal:        #538391;
+    --teal-dark:   #2f5a65;
+    --teal-darker: #1e4650;
+    --teal-mid:    #3e6975;
+    --mint:        #95D2B3;
+    --mint-light:  #b6dfc7;
+    --bg-pale:     #f4f9f7;
+    --bg-tint:     #e5eef1;
+    --bg-tint-2:   #f6fbfa;
+    --border:      #d5e4e8;
+    --intl-red:    #c94a4a;
+
+    /* Semantic */
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-hover: #f4f9f7;
+    --text: #1e4650;
+    --text-muted: #5a6d72;
+    --shadow-soft: rgba(83,131,145,0.10);
+    --shadow-med:  rgba(83,131,145,0.18);
+
+    --tier1-color: #b8860b;      /* rich mustard for gold-like accent */
+    --tier1-bg:    #fef8e0;
+    --tier1-border:#e8d97a;
+    --tier2-color: #2f5a65;      /* teal-darker for tier 2 */
+    --tier2-bg:    #dff0e6;
+    --tier2-border:#95D2B3;
+  }
+
+  [data-theme="dark"] {
+    --bg:            #101820;
+    --surface:       #182530;
+    --surface-hover: #21323e;
+    --border:        #2a3d48;
+    --text:          #e5eef1;
+    --text-muted:    #95a8ad;
+    --bg-pale:       #21323e;
+    --bg-tint:       #182530;
+    --bg-tint-2:     #21323e;
+    --shadow-soft:   rgba(0,0,0,0.25);
+    --shadow-med:    rgba(0,0,0,0.40);
+    --intl-red:      #ff8080;
+
+    --tier1-color: #ffd77a;
+    --tier1-bg:    rgba(232,217,122,0.16);
+    --tier1-border:rgba(232,217,122,0.35);
+    --tier2-color: #95D2B3;
+    --tier2-bg:    rgba(149,210,179,0.15);
+    --tier2-border:rgba(149,210,179,0.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans Pro', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 30px 24px 60px;
+    transition: background .25s ease, color .25s ease;
+  }
+
+  .container { max-width: 1360px; margin: 0 auto; }
+
+  .page-header-band {
+    background: linear-gradient(135deg, var(--bg-tint) 0%, var(--bg-tint-2) 100%);
+    border-bottom: 3px solid var(--mint);
+    padding: 24px 26px;
+    border-radius: 12px;
+    margin-bottom: 22px;
+  }
+  .page-header-band h1 {
+    color: var(--teal-dark);
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin: 0 0 4px 0;
+  }
+  .page-header-band h1 .fa { color: var(--teal); margin-right: 10px; }
+  .page-header-band p {
+    color: var(--teal-mid);
+    font-size: 0.95rem;
+    font-style: italic;
+    margin: 0;
+  }
+
+  /* Legend row */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 20px;
+    margin-bottom: 16px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  .legend-dot.red { background: var(--intl-red); }
+  .legend-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+  }
+  .legend-badge.t1 {
+    background: var(--tier1-bg);
+    color: var(--tier1-color);
+    border: 1px solid var(--tier1-border);
+  }
+  .legend-badge.t2 {
+    background: var(--tier2-bg);
+    color: var(--tier2-color);
+    border: 1px solid var(--tier2-border);
+  }
+
+  /* Controls bar */
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 22px;
+    margin-bottom: 22px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow:
+      0 1px 3px rgba(47,90,101,0.04),
+      0 8px 22px -8px var(--shadow-soft);
+  }
+  .clock-box { display: flex; flex-direction: column; gap: 2px; }
+  .clock-label {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+  .clock {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--teal-dark);
+    font-variant-numeric: tabular-nums;
+  }
+  [data-theme="dark"] .clock { color: var(--mint); }
+
+  .jump-btn {
+    cursor: pointer;
+    border: none;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    color: #fff;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 9px 18px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 3px 8px rgba(47,90,101,0.25);
+  }
+  .jump-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(47,90,101,0.30); }
+  .jump-btn:active { transform: translateY(1px); }
+
+  .theme-btn {
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--teal-dark);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.82rem;
+    padding: 8px 14px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: background .2s, border-color .2s, color .2s;
+  }
+  .theme-btn:hover { border-color: var(--teal); color: var(--teal); background: var(--bg-tint); }
+  [data-theme="dark"] .theme-btn { color: var(--mint); }
+  [data-theme="dark"] .theme-btn:hover { color: #fff; background: var(--surface-hover); }
+
+  .controls-spacer { flex: 1 1 auto; }
+
+  .filter-group { display: flex; align-items: center; gap: 8px; }
+  .filter-label {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+  .seg {
+    display: inline-flex;
+    background: var(--bg-tint);
+    border-radius: 20px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .seg-btn {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--teal-mid);
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.76rem;
+    padding: 6px 12px;
+    border-radius: 16px;
+    transition: background .2s, color .2s;
+    white-space: nowrap;
+  }
+  .seg-btn:hover { color: var(--teal-dark); }
+  .seg-btn.active {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(47,90,101,0.25);
+  }
+  [data-theme="dark"] .seg-btn { color: var(--text-muted); }
+  [data-theme="dark"] .seg-btn:hover { color: var(--text); }
+
+  /* Back-to-publications link */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--teal);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    margin-bottom: 12px;
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color .2s, color .2s;
+  }
+  .back-link:hover { color: var(--teal-mid); border-bottom-color: var(--mint); }
+
+  /* Table wrapper */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 14px;
+    background: var(--surface);
+    box-shadow:
+      0 1px 3px rgba(47,90,101,0.04),
+      0 8px 22px -8px var(--shadow-med);
+  }
+  table { width: 100%; border-collapse: collapse; min-width: 960px; }
+
+  thead th {
+    background: linear-gradient(180deg, var(--bg-tint) 0%, var(--bg-tint-2) 100%);
+    padding: 14px 18px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: var(--teal-dark);
+    border-bottom: 2px solid var(--mint);
+    position: sticky;
+    top: 0;
+    white-space: nowrap;
+    z-index: 2;
+  }
+  [data-theme="dark"] thead th { color: var(--mint); }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background .2s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface-hover); }
+
+  td {
+    padding: 14px 18px;
+    font-size: 0.88rem;
+    vertical-align: top;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  .due-date {
+    white-space: nowrap;
+    font-weight: 700;
+    color: var(--teal-dark);
+    font-size: 0.86rem;
+  }
+  [data-theme="dark"] .due-date { color: var(--mint); }
+
+  .conf-name {
+    font-weight: 700;
+    color: var(--teal-darker);
+    font-size: 0.94rem;
+  }
+  [data-theme="dark"] .conf-name { color: var(--text); }
+  .conf-full {
+    color: var(--text-muted);
+    font-size: 0.76rem;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+
+  /* International styling */
+  .intl .conf-name { color: var(--intl-red); }
+  .intl-venue { color: var(--intl-red); font-weight: 600; }
+
+  /* Tier 1 highlight — mint tint (per palette) */
+  tr.tier1 td {
+    background: linear-gradient(90deg, rgba(149,210,179,0.18) 0%, rgba(149,210,179,0.06) 100%);
+  }
+  tr.tier1 .conf-name { font-weight: 800; font-size: 0.96rem; }
+  [data-theme="dark"] tr.tier1 td {
+    background: linear-gradient(90deg, rgba(149,210,179,0.14) 0%, rgba(149,210,179,0.04) 100%);
+  }
+
+  /* Tier badges */
+  .tier-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.62rem;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    margin-left: 8px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+  .tier-badge.t1 {
+    background: var(--tier1-bg);
+    color: var(--tier1-color);
+    border: 1px solid var(--tier1-border);
+  }
+  .tier-badge.t2 {
+    background: var(--tier2-bg);
+    color: var(--tier2-color);
+    border: 1px solid var(--tier2-border);
+  }
+
+  /* Venue */
+  .venue { display: flex; align-items: flex-start; gap: 5px; }
+  .venue-pin { flex-shrink: 0; margin-top: 2px; }
+  .venue-pin.usa { color: var(--teal); }
+  .venue-pin.intl { color: var(--intl-red); }
+
+  /* Page limit */
+  .page-limit { font-weight: 700; color: var(--teal-dark); }
+  [data-theme="dark"] .page-limit { color: var(--text); }
+  .page-note { color: var(--text-muted); font-size: 0.76rem; margin-top: 3px; }
+
+  /* Links */
+  a.site-link {
+    color: var(--teal);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.82rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-bottom: 1px solid rgba(83,131,145,0.3);
+    transition: color .2s, border-color .2s;
+    word-break: break-all;
+  }
+  a.site-link:hover { color: var(--teal-mid); border-bottom-color: var(--teal); }
+  [data-theme="dark"] a.site-link { color: var(--mint); border-bottom-color: rgba(149,210,179,0.4); }
+  [data-theme="dark"] a.site-link:hover { color: #fff; border-bottom-color: var(--mint); }
+  a.site-link svg { flex-shrink: 0; }
+
+  /* Past conferences */
+  tbody tr.past { opacity: 0.4; }
+  tbody tr.past:hover { opacity: 0.65; }
+  .past-tag {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    background: rgba(90,109,114,0.12);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  /* Flash on jump */
+  tbody tr.flash td { animation: flashRow 1.8s ease-out; }
+  @keyframes flashRow {
+    0%, 30% { background: rgba(149,210,179,0.35); }
+    100% { background: transparent; }
+  }
+  tbody tr.tier1.flash td { animation: flashRowT1 1.8s ease-out; }
+  @keyframes flashRowT1 {
+    0%, 30% { background: rgba(149,210,179,0.55); }
+    100% { background: linear-gradient(90deg, rgba(149,210,179,0.18) 0%, rgba(149,210,179,0.06) 100%); }
+  }
+
+  tr.filtered-out { display: none; }
+  #noMatchRow td {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 30px 18px;
+    font-style: italic;
+  }
+
+  .footer-note {
+    margin-top: 22px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: right;
+    line-height: 1.65;
+  }
+  .footer-note b { color: var(--teal-dark); }
+  [data-theme="dark"] .footer-note b { color: var(--mint); }
+  .copyright {
+    margin-top: 8px;
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    body { padding: 16px 12px 40px; }
+    .page-header-band { padding: 20px 18px; }
+    .page-header-band h1 { font-size: 1.35rem; }
+    td, thead th { padding: 10px 12px; }
+    .controls-spacer { display: none; }
+    .filter-group { flex: 1 1 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a class="back-link" href="publications.html"><i class="fa fa-arrow-left"></i> Back to publications</a>
+
+  <section class="page-header-band">
+    <h1><i class="fa fa-calendar"></i> Preferred Publication Venues &mdash; 2026 Deadlines</h1>
+    <p>A curated list of conferences aligned with TITANS Lab research directions, sorted by submission deadline.</p>
+  </section>
+
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot red"></span> <span class="intl-venue">International venue</span></div>
+    <div class="legend-item"><span class="legend-badge t1">TIER 1</span> Top-4 security (S&amp;P, CCS, USENIX Sec, NDSS)</div>
+    <div class="legend-item"><span class="legend-badge t2">TIER 2</span> DSN, ACSAC, AsiaCCS, EuroS&amp;P, NSDI, SECON</div>
+  </div>
+
+  <div class="controls">
+    <div class="clock-box">
+      <div class="clock-label">Current date &amp; time</div>
+      <div class="clock" id="clock">&mdash;</div>
+    </div>
+    <button class="jump-btn" id="jumpBtn"><i class="fa fa-arrow-down"></i> Jump to upcoming</button>
+
+    <div class="controls-spacer"></div>
+
+    <div class="filter-group">
+      <span class="filter-label">Region</span>
+      <div class="seg" id="regionSeg">
+        <button class="seg-btn active" data-region="all">All</button>
+        <button class="seg-btn" data-region="us">USA</button>
+        <button class="seg-btn" data-region="intl">Outside US</button>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <span class="filter-label">Tier</span>
+      <div class="seg" id="tierSeg">
+        <button class="seg-btn active" data-tier="all">All</button>
+        <button class="seg-btn" data-tier="1">Tier 1</button>
+        <button class="seg-btn" data-tier="2">Tier 2</button>
+        <button class="seg-btn" data-tier="0">Other</button>
+      </div>
+    </div>
+
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme"></button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Due Date</th>
+          <th>Conference Title</th>
+          <th>Venue / Location</th>
+          <th>Page Limit</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+
+<!-- 7 Jan 2026 — ICDCS — Seoul (INTL) -->
+<tr>
+  <td class="due-date">7 Jan 2026</td>
+  <td class="intl"><div class="conf-name">IEEE ICDCS 2026</div><div class="conf-full">Intl. Conf. on Distributed Computing Systems</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Seoul, South Korea</span></div></td>
+  <td><div class="page-limit">10 pages</div><div class="page-note">+ refs, IEEE format</div></td>
+  <td><a class="site-link" href="https://icdcs2026.icdcs.org/" target="_blank">icdcs2026.icdcs.org</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">9 Jan 2026</td>
+  <td class="intl"><div class="conf-name">ESORICS 2026 (Winter)</div><div class="conf-full">European Symposium on Research in Computer Security</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Rome, Italy</span></div></td>
+  <td><div class="page-limit">20 pages</div><div class="page-note">LNCS format</div></td>
+  <td><a class="site-link" href="https://sites.google.com/di.uniroma1.it/esorics2026/home" target="_blank">sites.google.com/di.uniroma1.it/esorics2026</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">14 Jan 2026</td>
+  <td class="intl"><div class="conf-name">IEEE ICBC 2026</div><div class="conf-full">Intl. Conf. on Blockchain and Cryptocurrency</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Brisbane, Australia</span></div></td>
+  <td><div class="page-limit">6 pages</div><div class="page-note">7th page @ $100</div></td>
+  <td><a class="site-link" href="https://icbc2026.ieee-icbc.org/" target="_blank">icbc2026.ieee-icbc.org</a></td>
+</tr>
+
+<tr class="tier1">
+  <td class="due-date">14 Jan 2026</td>
+  <td class="intl"><div class="conf-name">ACM CCS 2026 (Cycle A) <span class="tier-badge t1">TIER 1</span></div><div class="conf-full">Conf. on Computer and Communications Security</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">The Hague, Netherlands</span></div></td>
+  <td><div class="page-limit">12 pages</div><div class="page-note">+ refs/appendices</div></td>
+  <td><a class="site-link" href="https://www.sigsac.org/ccs/CCS2026/" target="_blank">sigsac.org/ccs/CCS2026</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">28 Jan 2026</td>
+  <td class="intl"><div class="conf-name">ICML 2026</div><div class="conf-full">Intl. Conf. on Machine Learning</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Seoul, South Korea (COEX)</span></div></td>
+  <td><div class="page-limit">8 pages</div><div class="page-note">+ unlimited refs/appendix</div></td>
+  <td><a class="site-link" href="https://icml.cc/Conferences/2026" target="_blank">icml.cc/2026</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">31 Jan 2026</td>
+  <td class="intl"><div class="conf-name">IEEE COMPSAC 2026</div><div class="conf-full">Computers, Software, and Applications Conference</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Madrid, Spain</span></div></td>
+  <td><div class="page-limit">10 pages</div><div class="page-note">+2 extra allowed</div></td>
+  <td><a class="site-link" href="https://ieeecompsac.computer.org/2026/" target="_blank">ieeecompsac.computer.org/2026</a></td>
+</tr>
+
+<tr class="tier1">
+  <td class="due-date">5 Feb 2026</td>
+  <td><div class="conf-name">USENIX Security 2026 (Cycle 2) <span class="tier-badge t1">TIER 1</span></div><div class="conf-full">USENIX Security Symposium</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Baltimore, MD, USA</span></div></td>
+  <td><div class="page-limit">13 pages</div><div class="page-note">+ refs/appendices</div></td>
+  <td><a class="site-link" href="https://www.usenix.org/conference/usenixsecurity26" target="_blank">usenix.org/usenixsecurity26</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">15 Feb 2026</td>
+  <td class="intl"><div class="conf-name">SecureComm 2026</div><div class="conf-full">EAI Conf. on Security &amp; Privacy in Communication Networks</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Lancaster, UK</span></div></td>
+  <td><div class="page-limit">12–20 pages</div><div class="page-note">Springer LNICST</div></td>
+  <td><a class="site-link" href="https://securecomm.eai-conferences.org/2026/" target="_blank">securecomm.eai-conferences.org</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">16 Feb 2026</td>
+  <td class="intl"><div class="conf-name">IEEE SmartComp 2026</div><div class="conf-full">Intl. Conf. on Smart Computing</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Messina, Italy</span></div></td>
+  <td><div class="page-limit">8 pages</div><div class="page-note">Including references</div></td>
+  <td><a class="site-link" href="https://portale2.unime.it/smartcomp2026/" target="_blank">smartcomp2026.unime.it</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">16 Apr 2026</td>
+  <td><div class="conf-name">USENIX NSDI 2027 (Spring) <span class="tier-badge t2">TIER 2</span></div><div class="conf-full">Networked Systems Design and Implementation</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Providence, RI, USA</span></div></td>
+  <td><div class="page-limit">12 pages</div><div class="page-note">+ refs/appendices</div></td>
+  <td><a class="site-link" href="https://www.usenix.org/conference/nsdi27" target="_blank">usenix.org/nsdi27</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">20 Apr 2026</td>
+  <td class="intl"><div class="conf-name">IEEE LCN 2026</div><div class="conf-full">51st Conf. on Local Computer Networks</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Coimbra, Portugal</span></div></td>
+  <td><div class="page-limit">8 pages</div><div class="page-note">+ refs &amp; appendices</div></td>
+  <td><a class="site-link" href="https://www.ieeelcn.org/" target="_blank">ieeelcn.org</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">21 Apr 2026</td>
+  <td class="intl"><div class="conf-name">ESORICS 2026 (Spring)</div><div class="conf-full">European Symposium on Research in Computer Security</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Rome, Italy</span></div></td>
+  <td><div class="page-limit">20 pages</div><div class="page-note">LNCS format</div></td>
+  <td><a class="site-link" href="https://sites.google.com/di.uniroma1.it/esorics2026/home" target="_blank">sites.google.com/di.uniroma1.it/esorics2026</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">26 Apr 2026</td>
+  <td><div class="conf-name">IEEE SmartGridComm 2026</div><div class="conf-full">Comm., Control &amp; Computing for Smart Grids</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>College Station, TX, USA</span></div></td>
+  <td><div class="page-limit">6 pages</div><div class="page-note">7th page @ $100</div></td>
+  <td><a class="site-link" href="https://sgc2026.ieee-smartgridcomm.org/" target="_blank">sgc2026.ieee-smartgridcomm.org</a></td>
+</tr>
+
+<tr class="tier1">
+  <td class="due-date">29 Apr 2026</td>
+  <td class="intl"><div class="conf-name">ACM CCS 2026 (Cycle B) <span class="tier-badge t1">TIER 1</span></div><div class="conf-full">Conf. on Computer and Communications Security</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">The Hague, Netherlands</span></div></td>
+  <td><div class="page-limit">12 pages</div><div class="page-note">+ refs/appendices</div></td>
+  <td><a class="site-link" href="https://www.sigsac.org/ccs/CCS2026/" target="_blank">sigsac.org/ccs/CCS2026</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">3 May 2026</td>
+  <td class="intl"><div class="conf-name">IEEE GlobeCom 2026</div><div class="conf-full">Global Communications Conference</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Macao, China</span></div></td>
+  <td><div class="page-limit">6 pages</div><div class="page-note">+2 extra @ $100/pg</div></td>
+  <td><a class="site-link" href="https://globecom2026.ieee-globecom.org/" target="_blank">globecom2026.ieee-globecom.org</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">4 May 2026</td>
+  <td class="intl"><div class="conf-name">NeurIPS 2026</div><div class="conf-full">Conf. on Neural Information Processing Systems</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Sydney, Australia</span></div></td>
+  <td><div class="page-limit">9 pages</div><div class="page-note">+ refs/checklist/appendix</div></td>
+  <td><a class="site-link" href="https://neurips.cc/Conferences/2026" target="_blank">neurips.cc/2026</a></td>
+</tr>
+
+<tr class="tier1">
+  <td class="due-date">6 May 2026</td>
+  <td><div class="conf-name">NDSS 2027 (Summer) <span class="tier-badge t1">TIER 1</span></div><div class="conf-full">Network and Distributed System Security Symposium</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>TBA (San Diego expected)</span></div></td>
+  <td><div class="page-limit">13 pages</div><div class="page-note">+ refs/appendices</div></td>
+  <td><a class="site-link" href="https://www.ndss-symposium.org/ndss2027/" target="_blank">ndss-symposium.org/ndss2027</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">11 May 2026</td>
+  <td><div class="conf-name">IEEE CNS 2026</div><div class="conf-full">Conf. on Communications and Network Security</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Newark, DE, USA</span></div></td>
+  <td><div class="page-limit">9 pages</div><div class="page-note">Including references</div></td>
+  <td><a class="site-link" href="https://cns2026.ieee-cns.org/" target="_blank">cns2026.ieee-cns.org</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">15 May 2026</td>
+  <td><div class="conf-name">IEEE MILCOM 2026</div><div class="conf-full">Military Communications Conference</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Washington, DC area, USA</span></div></td>
+  <td><div class="page-limit">6 pages</div><div class="page-note">Standard IEEE</div></td>
+  <td><a class="site-link" href="https://milcom2026.ieee-milcom.org/" target="_blank">milcom2026.ieee-milcom.org</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">17 May 2026</td>
+  <td class="intl"><div class="conf-name">IEEE BRAINS 2026</div><div class="conf-full">Blockchain Research &amp; Applications for Innovative Networks</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Florence, Italy</span></div></td>
+  <td><div class="page-limit">8 pages</div><div class="page-note">Full; 4 pg short</div></td>
+  <td><a class="site-link" href="https://brains.dnac.org/2026/" target="_blank">brains.dnac.org/2026</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">26 May 2026</td>
+  <td><div class="conf-name">ACSAC 2026 <span class="tier-badge t2">TIER 2</span></div><div class="conf-full">Annual Computer Security Applications Conference</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Los Angeles, CA, USA</span></div></td>
+  <td><div class="page-limit">10 pages</div><div class="page-note">Est., ACM format</div></td>
+  <td><a class="site-link" href="https://www.acsac.org/" target="_blank">acsac.org</a></td>
+</tr>
+
+<tr class="tier1">
+  <td class="due-date">4 Jun 2026</td>
+  <td><div class="conf-name">IEEE S&amp;P 2027 (Cycle 1) <span class="tier-badge t1">TIER 1</span></div><div class="conf-full">Symposium on Security and Privacy</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Montreal, Canada</span></div></td>
+  <td><div class="page-limit">13 pg + 5 pg</div><div class="page-note">18 max (refs/appendix)</div></td>
+  <td><a class="site-link" href="https://sp2027.ieee-security.org/" target="_blank">sp2027.ieee-security.org</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">30 Jun 2026</td>
+  <td><div class="conf-name">IEEE HealthCom 2026</div><div class="conf-full">Intl. Conf. on E-health Networking &amp; Services</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>New York, NY, USA</span></div></td>
+  <td><div class="page-limit">6 pages</div><div class="page-note">+1 extra @ $85</div></td>
+  <td><a class="site-link" href="https://healthcom2026.ieee-healthcom.org/" target="_blank">healthcom2026.ieee-healthcom.org</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">31 Jul 2026</td>
+  <td><div class="conf-name">IEEE INFOCOM 2027</div><div class="conf-full">Intl. Conf. on Computer Communications</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Honolulu, HI, USA</span></div></td>
+  <td><div class="page-limit">10 pages</div><div class="page-note">9 pg main + refs</div></td>
+  <td><a class="site-link" href="https://infocom2027.ieee-infocom.org/" target="_blank">infocom2027.ieee-infocom.org</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">1 Aug 2026</td>
+  <td><div class="conf-name">IEEE CCNC 2027</div><div class="conf-full">Consumer Communications &amp; Networking Conference</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Las Vegas, NV, USA</span></div></td>
+  <td><div class="page-limit">6 pages</div><div class="page-note">+3 extra @ $100/pg</div></td>
+  <td><a class="site-link" href="https://ccnc2027.ieee-ccnc.org/" target="_blank">ccnc2027.ieee-ccnc.org</a></td>
+</tr>
+
+<tr class="tier1">
+  <td class="due-date">19 Aug 2026</td>
+  <td><div class="conf-name">NDSS 2027 (Fall) <span class="tier-badge t1">TIER 1</span></div><div class="conf-full">Network and Distributed System Security Symposium</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Seoul, Republic of Korea</span></div></td>
+  <td><div class="page-limit">13 pages</div><div class="page-note">+ refs/appendices</div></td>
+  <td><a class="site-link" href="https://www.ndss-symposium.org/ndss2027/" target="_blank">ndss-symposium.org/ndss2027</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">21 Aug 2026</td>
+  <td><div class="conf-name">AsiaCCS 2027 (Cycle 1) <span class="tier-badge t2">TIER 2</span></div><div class="conf-full">ACM Asia Conf. on Computer and Communications Security</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Macau, China</span></div></td>
+  <td><div class="page-limit">12 pages</div><div class="page-note">ACM format, + refs</div></td>
+  <td><a class="site-link" href="https://asiaccs2027.cityu.edu.mo/index.html" target="_blank">asiaccs2027.cityu.edu.mo</a></td>
+</tr>
+
+<tr class="tier1">
+  <td class="due-date">25 Aug 2026</td>
+  <td><div class="conf-name">USENIX Security 2027 (Cycle 1) <span class="tier-badge t1">TIER 1</span></div><div class="conf-full">USENIX Security Symposium</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Denver, CO, USA</span></div></td>
+  <td><div class="page-limit">13 pages</div><div class="page-note">+ refs/appendices</div></td>
+  <td><a class="site-link" href="https://www.usenix.org/conference/usenixsecurity27" target="_blank">usenix.org/usenixsecurity27</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">1 Sep 2026</td>
+  <td><div class="conf-name">ICLR 2027</div><div class="conf-full">Intl. Conf. on Learning Representations</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>TBA</span></div></td>
+  <td><div class="page-limit">9 pages</div><div class="page-note">+ unlimited refs/appendix</div></td>
+  <td><a class="site-link" href="https://iclr.cc/Conferences/2027" target="_blank">iclr.cc/2027</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">10 Sep 2026</td>
+  <td><div class="conf-name">USENIX NSDI 2027 (Fall) <span class="tier-badge t2">TIER 2</span></div><div class="conf-full">Networked Systems Design and Implementation</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Providence, RI, USA</span></div></td>
+  <td><div class="page-limit">12 pages</div><div class="page-note">+ refs/appendices</div></td>
+  <td><a class="site-link" href="https://www.usenix.org/conference/nsdi27" target="_blank">usenix.org/nsdi27</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">2 Oct 2026</td>
+  <td><div class="conf-name">IEEE ICC 2027</div><div class="conf-full">Intl. Conf. on Communications</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Washington, DC, USA</span></div></td>
+  <td><div class="page-limit">6 pages</div><div class="page-note">+1 extra @ $100</div></td>
+  <td><a class="site-link" href="https://icc2027.ieee-icc.org/" target="_blank">icc2027.ieee-icc.org</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">1 Nov 2026</td>
+  <td><div class="conf-name">NOMS 2027</div><div class="conf-full">IEEE/IFIP Network Operations and Management Symposium</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>TBA</span></div></td>
+  <td><div class="page-limit">8 pg full / 4 pg short</div><div class="page-note">+ refs</div></td>
+  <td><a class="site-link" href="https://noms2027.ieee-noms.org/" target="_blank">noms2027.ieee-noms.org</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">1 Nov 2026</td>
+  <td><div class="conf-name">CVPR 2027</div><div class="conf-full">Conf. on Computer Vision and Pattern Recognition</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>TBA</span></div></td>
+  <td><div class="page-limit">8 pages</div><div class="page-note">+ unlimited refs</div></td>
+  <td><a class="site-link" href="https://cvpr.thecvf.com/Conferences/2027" target="_blank">cvpr.thecvf.com/2027</a></td>
+</tr>
+
+<tr class="tier1">
+  <td class="due-date">10 Nov 2026</td>
+  <td><div class="conf-name">IEEE S&amp;P 2027 (Cycle 2) <span class="tier-badge t1">TIER 1</span></div><div class="conf-full">Symposium on Security and Privacy</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Montreal, Canada</span></div></td>
+  <td><div class="page-limit">13 pg + 5 pg</div><div class="page-note">18 max (refs/appendix)</div></td>
+  <td><a class="site-link" href="https://sp2027.ieee-security.org/" target="_blank">sp2027.ieee-security.org</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">21 Nov 2026</td>
+  <td><div class="conf-name">IEEE EuroS&amp;P 2027 <span class="tier-badge t2">TIER 2</span></div><div class="conf-full">European Symposium on Security and Privacy</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>TBA</span></div></td>
+  <td><div class="page-limit">13 pages</div><div class="page-note">+ unlimited refs/appendix</div></td>
+  <td><a class="site-link" href="https://eurosp2027.ieee-security.org/" target="_blank">eurosp2027.ieee-security.org</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">1 Dec 2026</td>
+  <td><div class="conf-name">IEEE SECON 2027 <span class="tier-badge t2">TIER 2</span></div><div class="conf-full">Intl. Conf. on Sensing, Communication, and Networking</div></td>
+  <td><div class="venue"><svg class="venue-pin usa" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>TBA</span></div></td>
+  <td><div class="page-limit">9 pages</div><div class="page-note">Incl. refs &amp; appendices</div></td>
+  <td><a class="site-link" href="https://secon2027.ieee-secon.org/" target="_blank">secon2027.ieee-secon.org</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">2 Dec 2026</td>
+  <td><div class="conf-name">DSN 2027 <span class="tier-badge t2">TIER 2</span></div><div class="conf-full">IEEE/IFIP Intl. Conf. on Dependable Systems and Networks</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Berlin, Germany</span></div></td>
+  <td><div class="page-limit">11 pages</div><div class="page-note">+ refs</div></td>
+  <td><a class="site-link" href="https://dsn2027-berlin.github.io/" target="_blank">dsn2027-berlin.github.io</a></td>
+</tr>
+
+<tr>
+  <td class="due-date">11 Dec 2026</td>
+  <td><div class="conf-name">AsiaCCS 2027 (Cycle 2) <span class="tier-badge t2">TIER 2</span></div><div class="conf-full">ACM Asia Conf. on Computer and Communications Security</div></td>
+  <td><div class="venue"><svg class="venue-pin intl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="intl-venue">Macau, China</span></div></td>
+  <td><div class="page-limit">12 pages</div><div class="page-note">ACM format, + refs</div></td>
+  <td><a class="site-link" href="https://asiaccs2027.cityu.edu.mo/index.html" target="_blank">asiaccs2027.cityu.edu.mo</a></td>
+</tr>
+
+<tr id="noMatchRow" style="display:none;"><td colspan="5">No conferences match the selected filters.</td></tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <p class="footer-note">
+    Sorted by submission deadline &bull;
+    <b style="color:var(--intl-red);">Red</b> = non-USA venue &bull;
+    <b>TIER 1</b> = Top-4 security &bull;
+    <b>TIER 2</b> = notable security/systems &bull;
+    Data as of April 15, 2026 &mdash; always verify on official sites.
+  </p>
+  <p class="copyright">&copy; <span id="year">2026</span> TITANS Lab &bull; Compiled for internal planning &bull; All deadlines subject to change</p>
+</div>
+
+<script>
+(function () {
+  var MONTHS = { Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11 };
+
+  function parseDue(text) {
+    var m = (text || "").trim().match(/(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})/);
+    if (!m) return null;
+    return new Date(parseInt(m[3], 10), MONTHS[m[2]], parseInt(m[1], 10));
+  }
+  function startOfToday() { var d = new Date(); d.setHours(0,0,0,0); return d; }
+
+  var allRows = Array.prototype.slice.call(document.querySelectorAll("tbody tr"))
+    .filter(function (r) { return r.id !== "noMatchRow"; });
+  var noMatchRow = document.getElementById("noMatchRow");
+  var today = startOfToday();
+
+  allRows.forEach(function (row) {
+    var dateCell = row.querySelector(".due-date");
+    var due = dateCell ? parseDue(dateCell.textContent) : null;
+    row._due = due;
+    row._region = row.querySelector(".intl") ? "intl" : "us";
+    if (row.classList.contains("tier1")) row._tier = "1";
+    else if (row.querySelector(".tier-badge.t2")) row._tier = "2";
+    else row._tier = "0";
+    if (due && due < today) {
+      row.classList.add("past");
+      if (dateCell && !dateCell.querySelector(".past-tag")) {
+        var tag = document.createElement("div");
+        tag.className = "past-tag";
+        tag.textContent = "Passed";
+        dateCell.appendChild(tag);
+      }
+    }
+  });
+
+  var clockEl = document.getElementById("clock");
+  function fmt() {
+    var opts = { weekday:"short", year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit" };
+    try { clockEl.textContent = new Date().toLocaleString(undefined, opts); }
+    catch (e) { clockEl.textContent = new Date().toString(); }
+  }
+  fmt(); setInterval(fmt, 30000);
+
+  var root = document.documentElement;
+  var themeBtn = document.getElementById("themeBtn");
+  var SUN  = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  var MOON = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>';
+  function read() { try { return localStorage.getItem("titansTheme"); } catch (e) { return null; } }
+  function save(v) { try { localStorage.setItem("titansTheme", v); } catch (e) {} }
+  function apply(theme) {
+    root.setAttribute("data-theme", theme);
+    themeBtn.innerHTML = (theme === "dark") ? SUN + "<span>Light</span>" : MOON + "<span>Dark</span>";
+  }
+  apply(read() || "light");
+  themeBtn.addEventListener("click", function () {
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    apply(next); save(next);
+  });
+
+  var yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  var regionFilter = "all";
+  var tierFilter = "all";
+  function applyFilters() {
+    var anyVisible = false;
+    allRows.forEach(function (row) {
+      var ok = (regionFilter === "all" || row._region === regionFilter) &&
+               (tierFilter === "all" || row._tier === tierFilter);
+      row.classList.toggle("filtered-out", !ok);
+      if (ok) anyVisible = true;
+    });
+    noMatchRow.style.display = anyVisible ? "none" : "";
+  }
+  function wireSeg(segId, onPick) {
+    var seg = document.getElementById(segId);
+    seg.addEventListener("click", function (e) {
+      var btn = e.target.closest(".seg-btn");
+      if (!btn) return;
+      seg.querySelectorAll(".seg-btn").forEach(function (b) { b.classList.remove("active"); });
+      btn.classList.add("active");
+      onPick(btn);
+    });
+  }
+  wireSeg("regionSeg", function (btn) { regionFilter = btn.getAttribute("data-region"); applyFilters(); });
+  wireSeg("tierSeg",   function (btn) { tierFilter   = btn.getAttribute("data-tier"); applyFilters(); });
+
+  document.getElementById("jumpBtn").addEventListener("click", function () {
+    var t = startOfToday(), target = null;
+    for (var i = 0; i < allRows.length; i++) {
+      var row = allRows[i];
+      if (row.classList.contains("filtered-out")) continue;
+      if (row._due && row._due >= t) { target = row; break; }
+    }
+    if (!target) { alert("No upcoming conferences match the current filters."); return; }
+    target.scrollIntoView({ behavior: "smooth", block: "center" });
+    allRows.forEach(function (r) { r.classList.remove("flash"); });
+    void target.offsetWidth;
+    target.classList.add("flash");
+  });
+
+  applyFilters();
+})();
+</script>
+</body>
+</html>

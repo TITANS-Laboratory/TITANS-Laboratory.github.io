@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TITANS Lab - Home</title>
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div data-include="nav"></div>
+
+<!-- ============ TOP SPLIT ============ -->
+<div class="container-fluid">
+  <div class="row">
+
+    <div id="homeid" class="col-sm-8">
+
+      <!-- Intro card: white logo panel + tinted text panel -->
+      <div class="intro-card">
+        <div class="intro-logo">
+          <img src="images/logopic/home_logo.jpg" alt="TITANS Lab logo">
+        </div>
+        <div class="intro-text">
+          <h2>Welcome to <span class="teal">TITANS Lab!</span></h2>
+          <p>
+            <ins><strong>T</strong></ins>ransformative
+            <ins><strong>I</strong></ins>nnovation for
+            <ins><strong>T</strong></ins>rustworthy
+            <ins><strong>A</strong></ins>I and
+            <ins><strong>N</strong></ins>etwork
+            <ins><strong>S</strong></ins>ecurity (<strong>TITANS</strong>) lab is part of the
+            Department of Computer Science at
+            <a href="https://siu.edu/" target="_blank">Southern Illinois University Carbondale
+            <i class="fa fa-external-link"></i></a>, led by PI
+            <a href="https://alvi-ataur-khalil.github.io/" target="_blank">Alvi Ataur Khalil
+            <i class="fa fa-external-link"></i></a>. The TITANS Lab is dedicated to advancing
+            research in cybersecurity, blockchain systems, and artificial intelligence. Our
+            mission is to design secure, scalable, and intelligent technologies that address
+            real-world challenges.
+          </p>
+        </div>
+      </div>
+
+      <p class="intro-follow">We develop systematic defenses, intrusion-detection pipelines,
+      formal verification workflows, and cryptographic protocol enhancements by combining
+      data-driven modeling, program analysis, and zero-knowledge techniques.</p>
+
+      <!-- Carousel -->
+      <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="hover">
+        <ol class="carousel-indicators">
+          <li data-target="#carousel" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel" data-slide-to="1"></li>
+          <li data-target="#carousel" data-slide-to="2"></li>
+          <li data-target="#carousel" data-slide-to="3"></li>
+          <li data-target="#carousel" data-slide-to="4"></li>
+          <li data-target="#carousel" data-slide-to="5"></li>
+        </ol>
+        <div class="carousel-inner" style="height:410px; background-color:#fff;">
+          <div class="item active"><img src="images/slider7001400/blockchain1.gif" alt="" style="height:100%; width:100%; object-fit:contain;"></div>
+          <div class="item"><img src="images/slider7001400/blockchain2.gif" alt="" style="height:100%; width:100%; object-fit:contain;"></div>
+          <div class="item"><img src="images/slider7001400/AI3.gif"         alt="" style="height:100%; width:100%; object-fit:contain;"></div>
+          <div class="item"><img src="images/slider7001400/AI4.gif"         alt="" style="height:100%; width:100%; object-fit:contain;"></div>
+          <div class="item"><img src="images/slider7001400/blockchain5.gif" alt="" style="height:100%; width:100%; object-fit:contain;"></div>
+          <div class="item"><img src="images/slider7001400/blockchain6.gif" alt="" style="height:100%; width:100%; object-fit:contain;"></div>
+        </div>
+        <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span><span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span><span class="sr-only">Next</span>
+        </a>
+      </div>
+
+      <!-- Research themes block -->
+      <div class="theme-block">
+        <h3 class="theme-block-heading">Research Themes</h3>
+        <p class="theme-block-sub">Our research lies at the intersection of cybersecurity,
+        reinforcement learning, control theory, optimization, and privacy-preserving techniques.
+        It explores how intelligent agents can make strategic, adaptive decisions in
+        adversarial and distributed environments.</p>
+        <div class="theme-strip">
+          <a class="theme-chip" href="research.html">
+            <div class="theme-icon"><i class="fa fa-check-circle"></i></div>
+            <span>Trustworthy AI</span>
+          </a>
+          <a class="theme-chip" href="research.html">
+            <div class="theme-icon"><i class="fa fa-shield"></i></div>
+            <span>Cybersecurity</span>
+          </a>
+          <a class="theme-chip" href="research.html">
+            <div class="theme-icon"><i class="fa fa-cubes"></i></div>
+            <span>Blockchain</span>
+          </a>
+          <a class="theme-chip" href="research.html">
+            <div class="theme-icon"><i class="fa fa-plane"></i></div>
+            <span>Autonomous Vehicles</span>
+          </a>
+          <a class="theme-chip" href="research.html">
+            <div class="theme-icon"><i class="fa fa-eye"></i></div>
+            <span>Vision Language Models</span>
+          </a>
+        </div>
+        <p class="text-center theme-cta">
+          <a href="research.html" class="btn-teal">See all research <i class="fa fa-arrow-right"></i></a>
+        </p>
+      </div>
+
+    </div>
+
+    <div id="newsid" class="col-sm-4">
+      <div class="news-panel">
+        <h3 class="panel-heading-custom">
+          <i class="fa fa-newspaper-o"></i> Recent News
+        </h3>
+        <div id="news-sidebar-list"></div>
+        <a href="allnews.html" class="see-all-link">See all news <i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ c PUBLICATIONS ============ -->
+<!-- <section class="section-alt">
+  <div class="container-fluid">
+    <div class="section-heading">
+      <h2>Recent Publications</h2>
+      <p class="section-sub">A few group highlights, the full list is on the publications page.</p>
+    </div>
+    <div id="pub-preview" class="row"></div>
+    <p class="text-center" style="margin-top:20px;">
+      <a href="publications.html" class="btn-teal">All publications <i class="fa fa-arrow-right"></i></a>
+    </p>
+  </div>
+</section> -->
+
+<!-- ============ CTA: PhD OPENINGS ============ -->
+<section class="cta-band" style="margin-top:20px;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-8">
+        <!-- <h2>We're recruiting PhD students</h2> -->
+        <p>Join us to work at the intersection of <b>cybersecurity, AI</b>, and <b>distributed architectures</b>. 
+      </div>
+      <div class="col-sm-4 cta-btn-col">
+        <a href="openings.html" class="btn-cta">See open positions <i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECENT PRESS ============ -->
+<section class="press-strip-section">
+  <div class="container-fluid">
+    <div class="section-heading">
+      <h2>Recent Press &amp; Media</h2>
+      <p class="section-sub">Features, awards, and announcements about TITANS Lab.</p>
+    </div>
+    <div class="press-strip-row">
+      <div id="home-press-list" class="press-strip"></div>
+      <a href="press.html" class="press-see-all" aria-label="See all press">
+        <i class="fa fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div data-include="footer"></div>
+
+<script src="partials/nav.js"></script>
+<script src="partials/footer.js"></script>
+<script src="data/news.js"></script>
+<script src="data/publist.js"></script>
+<script src="data/press.js"></script>
+<script src="assets/site.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
