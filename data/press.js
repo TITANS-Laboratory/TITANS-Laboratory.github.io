@@ -9,6 +9,14 @@
 // - tag:       optional short label ("Award", "Feature", "Grant", etc.)
 
 window.PRESS = [
+    {
+    "date": "August 19, 2026",
+    "title": "SoC Faculty Awarded NSF I-Corps Grant to Advance AI Reliability Technology",
+    "outlet": "SIU School of Computing",
+    "thumbnail": "icorps_ai_reliability.JPG",
+    "url": "https://soc.siu.edu/news/articles/09-04-2026.php",
+    "tag": "Grant"
+  },
   {
     "date": "June 5, 2026",
     "title": "SIU School of Computing Professor Receives NAIRR Pilot Award for Privacy-Preserving Multimodal AI in Healthcare",
