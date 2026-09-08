@@ -13,7 +13,7 @@ window.PRESS = [
     "date": "August 19, 2026",
     "title": "SoC Faculty Awarded NSF I-Corps Grant to Advance AI Reliability Technology",
     "outlet": "SIU School of Computing",
-    "thumbnail": "icorps_ai_reliability.JPG",
+    "thumbnail": "icorps_ai_reliability.png",
     "url": "https://soc.siu.edu/news/articles/09-04-2026.php",
     "tag": "Grant"
   },
