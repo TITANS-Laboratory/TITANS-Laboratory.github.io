@@ -7,7 +7,7 @@
   { href: "team.html",         label: "Team" },
   { href: "research.html",     label: "Research & Grants" },
   { href: "publications.html", label: "Publications" },
-  { href: "openings.html",     label: "Openings" },
+  { href: "equipment.html",    label: "Lab Equipments" },
   { href: "press.html",        label: "Press" }
 ];
 

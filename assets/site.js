@@ -581,6 +581,43 @@ if (grantsEl && window.GRANTS) {
       }).join("");
     }
 
+    // Equipment page
+const eqEl = $("#equipment-list");
+if (eqEl && window.EQUIPMENT) {
+  eqEl.innerHTML = window.EQUIPMENT.map((cat) => {
+    const items = cat.items.map((it) => {
+      const thumb = it.thumbnail
+        ? `<img src="images/equipmentpic/${esc(it.thumbnail)}" alt="">`
+        : `<div class="eq-thumb-placeholder"><i class="fa fa-cube"></i></div>`;
+      const qty = it.quantity && it.quantity > 1
+        ? `<span class="eq-qty">×${it.quantity}</span>`
+        : "";
+      const specs = it.specs
+        ? `<ul class="eq-specs">${
+            Object.keys(it.specs).map((k) =>
+              `<li><span class="eq-spec-key">${esc(k)}</span> ${esc(it.specs[k])}</li>`
+            ).join("")
+          }</ul>`
+        : "";
+      const notes = it.notes ? `<p class="eq-notes">${esc(it.notes)}</p>` : "";
+      return `
+        <div class="eq-card">
+          <div class="eq-thumb">${thumb}</div>
+          <div class="eq-body">
+            <h4 class="eq-name">${esc(it.name)} ${qty}</h4>
+            ${specs}
+            ${notes}
+          </div>
+        </div>`;
+    }).join("");
+    return `
+      <section class="eq-category">
+        <h3 class="eq-category-heading">${esc(cat.category)}</h3>
+        <div class="eq-grid">${items}</div>
+      </section>`;
+  }).join("");
+}
+
     // -------- Publications page --------
     if (window.PUBLIST || window.PATENTS) {
 
