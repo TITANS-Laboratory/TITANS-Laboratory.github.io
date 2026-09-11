@@ -45,7 +45,7 @@ window.EQUIPMENT = [
     "items": [
       {
         "name": "Synology DiskStation DS223j NAS",
-        "thumbnail": "synology-ds223j.jpg",
+        "thumbnail": "synology-ds223j.png",
         "quantity": 1,
         "specs": {
           "Storage": "2 × 4 TB Synology HAT3300 Plus enterprise HDDs"
@@ -54,19 +54,19 @@ window.EQUIPMENT = [
       },
       {
         "name": "Raspberry Pi 4 (8 GB)",
-        "thumbnail": "raspberry-pi-4.jpg",
+        "thumbnail": "raspberry-pi-4.png",
         "quantity": 3,
         "notes": "Blockchain networks, distributed consensus, edge computing."
       },
       {
         "name": "Raspberry Pi 5 (4 GB)",
-        "thumbnail": "raspberry-pi-5.jpg",
+        "thumbnail": "raspberry-pi-5.png",
         "quantity": 2,
         "notes": "Blockchain networks, distributed consensus, edge computing."
       },
       {
         "name": "Raspberry Pi Zero W",
-        "thumbnail": "raspberry-pi-zero-w.jpg",
+        "thumbnail": "raspberry-pi-zero-w.png",
         "quantity": 5,
         "notes": "Embedded compute nodes for IoT security research."
       }
@@ -77,13 +77,13 @@ window.EQUIPMENT = [
     "items": [
       {
         "name": "Arduino Nano 33 BLE Sense Rev2 (with Headers)",
-        "thumbnail": "arduino-nano-33-ble.jpg",
+        "thumbnail": "arduino-nano-33-ble.png",
         "quantity": 2,
         "notes": "AI microcontroller with onboard sensors and Bluetooth — supports wearables, gesture and voice recognition. MFG #ABX00070."
       },
       {
         "name": "Arduino Nano ESP32 (without Headers)",
-        "thumbnail": "arduino-nano-esp32.jpg",
+        "thumbnail": "arduino-nano-esp32.png",
         "quantity": 1,
         "specs": {
           "MCU": "ESP32-S3"
@@ -92,13 +92,13 @@ window.EQUIPMENT = [
       },
       {
         "name": "EEG Neurofeedback Headband",
-        "thumbnail": "eeg-headband.jpg",
+        "thumbnail": "eeg-headband.png",
         "quantity": 1,
         "notes": "Brain-computer interface research and cognitive state assessment."
       },
       {
         "name": "Freenove 4WD Autonomous Vehicle Development Kit",
-        "thumbnail": "freenove-4wd.jpg",
+        "thumbnail": "freenove-4wd.png",
         "quantity": 1,
         "notes": "Programmable wireless control, ultrasonic sensing, line tracking, obstacle avoidance."
       }
