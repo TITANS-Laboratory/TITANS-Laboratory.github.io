@@ -28,6 +28,15 @@ window.NEWS = [
   //     { "src": "MSU_talk.jpg",     "position": "bottom", "caption": "With the audience" }
   //   ]
   // },
+  
+  {
+    "date": "September 2026",
+    "headline": `TITANS Lab selected to lead a presentation panel at the <a href="https://iin.uillinois.edu/conference/" target="_blank" rel="noopener">Illinois Innovation Network (IIN) Conference 2026</a>.`,
+    "body": `Following a competitive review of panel proposals by the IIN program committee, the TITANS Lab has been selected to lead a presentation panel titled <b>"Trustworthy AI in Practice: Emerging Threats and Privacy-Preserving Solutions for Illinois Healthcare and High-Stakes Systems"</b> at the <a href="https://iin.uillinois.edu/conference/" target="_blank" rel="noopener">2026 Illinois Innovation Network Conference: Powering Illinois' Future Together</a>, hosted at Southern Illinois University Edwardsville on October 22–23, 2026. The panel, led by Dr. Khalil with PhD students Abdullahil Kafi and Md Khalid Syfullah, will address emerging adversarial threats against retrieval-augmented generation (RAG) systems deployed in clinical, legal, and financial decision-support settings, alongside privacy-preserving split learning frameworks that enable equitable participation in medical AI development for smaller healthcare providers across Illinois. The session aligns with the conference's focus on advancements in biotechnologies and socially conscious innovation. Congratulations Kafi and Khalid!`,
+    "images": [
+      { "src": "INN_conference26.png",  "position": "left",  "caption": "" }
+    ]
+  },  
   {
     "date": "August 2026",
     "headline": `TITANS Lab received a $50K NSF I-Corps Award, where Dr. Khalil served as the PI (Award #<a href="https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2637735" target="_blank" rel="noopener">2637735</a>).`,

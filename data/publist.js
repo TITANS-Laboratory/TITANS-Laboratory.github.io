@@ -48,6 +48,7 @@ window.PUBLIST = [
     },
     "short_venue": "IEEE SMC 2026",
     "category": "privacy",
+    "arxiv":     "https://arxiv.org/abs/2609.12168",
     "highlight": 1,
     "long": 0,
     "published": 1,
