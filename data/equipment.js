@@ -109,7 +109,7 @@ window.EQUIPMENT = [
     "items": [
       {
         "name": "Dell Pro Max 16 Laptop (MC16255)",
-        "thumbnail": "dell-pro-max-16.jpg",
+        "thumbnail": "dell-pro-max-16.png",
         "quantity": 1,
         "specs": {
           "CPU": "AMD Ryzen AI 9 HX PRO 370 (45W)",
@@ -117,17 +117,16 @@ window.EQUIPMENT = [
           "GPU": "NVIDIA RTX PRO 1000 Blackwell (8 GB GDDR7)",
           "Storage": "1 TB Performance SSD (SED Ready)"
         },
-        "notes": "16\" QHD+ display, Wi-Fi 7, Bluetooth 5.4, backlit keyboard, fingerprint reader, Windows 11 Pro."
       },
       {
         "name": "Dell Performance Dock (WD19DCS)",
-        "thumbnail": "dell-wd19dcs.jpg",
+        "thumbnail": "dell-wd19dcs.png",
         "quantity": 2,
         "notes": "210 W power delivery with 3-year hardware service."
       },
       {
         "name": "Lenovo Legion R34w-30 Curved LED Monitor",
-        "thumbnail": "lenovo-r34w.jpg",
+        "thumbnail": "lenovo-r34w.png",
         "quantity": 2,
         "notes": "34\" curved display with HDR support. MFG #67C7GACBUS."
       },
@@ -145,7 +144,7 @@ window.EQUIPMENT = [
     //   },
       {
         "name": "Apple iPad Pro 12.9\" (256 GB) with Apple Pencil",
-        "thumbnail": "ipad-pro.jpg",
+        "thumbnail": "ipad-pro.png",
         "quantity": 1,
         "notes": "Mobile app development, interactive visualization, HCI studies."
       }
@@ -156,25 +155,25 @@ window.EQUIPMENT = [
     "items": [
       {
         "name": "HAPPRUN Smart Projector",
-        "thumbnail": "happrun-projector.jpg",
+        "thumbnail": "happrun-projector.png",
         "quantity": 1,
         "notes": "1500 ANSI lumens, 4K decoding, Wi-Fi 6, Bluetooth 5.2, auto focus, Dolby Audio."
       },
       {
         "name": "Epson EcoTank ET-4800 Multifunction Printer",
-        "thumbnail": "epson-et4800.jpg",
+        "thumbnail": "epson-et4800.png",
         "quantity": 1,
         "notes": "Research documentation and instructional materials."
       },
       {
         "name": "Fellowes 99Ci Cross-Cut Shredder",
-        "thumbnail": "fellowes-99ci.jpg",
+        "thumbnail": "fellowes-99ci.png",
         "quantity": 1,
         "notes": "Secure disposal of confidential research documents."
       },
       {
         "name": "Quntis Monitor Light Bar",
-        "thumbnail": "quntis-lamp.jpg",
+        "thumbnail": "quntis-lamp.png",
         "quantity": 1,
         "notes": "Auto-dimming light bar with touch control. MFG #LI-HY-0214-BK."
       }
