@@ -3,24 +3,53 @@
 
 (function () {
   const NAV_ITEMS = [
-  { href: "index.html",        label: "Home" },
-  { href: "team.html",         label: "Team" },
-  { href: "research.html",     label: "Research & Grants" },
-  { href: "publications.html", label: "Publications" },
-  { href: "equipment.html",    label: "Lab Equipments" },
-  { href: "press.html",        label: "Press" }
-];
+    { href: "index.html",        label: "Home" },
+    {
+      label: "Team & Openings",
+      children: [
+        { href: "team.html",     label: "Team",     icon: "fa-users" },
+        { href: "openings.html", label: "Openings", icon: "fa-briefcase" }
+      ]
+    },
+    { href: "research.html",     label: "Research & Grants" },
+    { href: "publications.html", label: "Publications" },
+    // { href: "equipment.html",    label: "Lab & Equipment" },
+    {
+      label: "News & Press",
+      children: [
+        { href: "allnews.html", label: "News",  icon: "fa-newspaper-o" },
+        { href: "press.html",   label: "Press", icon: "fa-star" }
+      ]
+    }
+  ];
 
   const EXTERNAL_ITEMS = [
     { href: "https://alvi-ataur-khalil.github.io/", label: "Director's Portfolio" }
   ];
 
-  const items = NAV_ITEMS
-    .map(i => `        <li><a href="${i.href}">${i.label}</a></li>`)
-    .concat(EXTERNAL_ITEMS.map(
-      i => `        <li><a href="${i.href}" target="_blank" rel="noopener">${i.label} <i class="fa fa-external-link" style="font-size:0.8em; opacity:0.7;"></i></a></li>`
-    ))
-    .join("\n");
+  const navItemsHtml = NAV_ITEMS.map((item) => {
+    if (item.children && item.children.length) {
+      const kids = item.children.map((c) =>
+        `<li><a href="${c.href}">${c.icon ? `<i class="fa ${c.icon}"></i> ` : ""}${c.label}</a></li>`
+      ).join("");
+      return `
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            ${item.label} <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu">${kids}</ul>
+        </li>`;
+    }
+    return `<li><a href="${item.href}">${item.label}</a></li>`;
+  }).join("");
+
+  const externalItemsHtml = EXTERNAL_ITEMS.map((item) =>
+    `<li class="nav-external">
+       <a href="${item.href}" target="_blank" rel="noopener">
+         ${item.label} <i class="fa fa-external-link"></i>
+       </a>
+     </li>`
+  ).join("");
 
   window.NAV_HTML = `
 <nav class="navbar navbar-titans navbar-fixed-top">
@@ -40,7 +69,8 @@
     </div>
     <div class="collapse navbar-collapse" id="nav-menu">
       <ul class="nav navbar-nav navbar-right">
-${items}
+${navItemsHtml}
+${externalItemsHtml}
       </ul>
     </div>
   </div>

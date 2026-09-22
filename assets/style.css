@@ -3157,3 +3157,136 @@ h5.section-title span { font-size: 1em; }
   .eq-grid { grid-template-columns: 1fr; }
   .eq-thumb { height: 160px; }
 }
+
+/* ============================================================
+   NAVBAR — News & Press dropdown
+   ============================================================ */
+.navbar .dropdown-toggle .fa-caret-down {
+  margin-left: 4px;
+  font-size: 0.85em;
+  opacity: 0.7;
+  transition: transform .2s;
+}
+.navbar .dropdown:hover .dropdown-toggle .fa-caret-down {
+  transform: translateY(1px);
+  opacity: 1;
+}
+
+/* Open on hover (desktop), not just click */
+@media (min-width: 768px) {
+  .navbar .dropdown:hover > .dropdown-menu { display: block; }
+  .navbar .dropdown > .dropdown-toggle:focus + .dropdown-menu { display: block; }
+}
+
+/* Panel */
+.navbar .dropdown-menu {
+  min-width: 200px;
+  padding: 6px;
+  margin-top: 0;
+  background: linear-gradient(180deg, #2f5a65 0%, #1e4650 100%);
+  border: none;
+  border-radius: 0 0 10px 10px;
+  border-top: 3px solid #95D2B3;
+  box-shadow: 0 10px 25px -8px rgba(30,70,80,0.35);
+}
+.navbar .dropdown-menu > li > a {
+  color: #e5eef1 !important;
+  background: transparent !important;
+  padding: 9px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.92em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background .2s, color .2s, transform .15s;
+}
+.navbar .dropdown-menu > li > a .fa {
+  color: #95D2B3;
+  width: 18px;
+  text-align: center;
+  transition: color .2s;
+}
+.navbar .dropdown-menu > li > a:hover,
+.navbar .dropdown-menu > li > a:focus {
+  background: rgba(149,210,179,0.15) !important;
+  color: #fff !important;
+  transform: translateX(2px);
+}
+.navbar .dropdown-menu > li > a:hover .fa {
+  color: #fff;
+}
+
+/* Small bridge so hover doesn't drop between toggle and menu */
+.navbar .dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: transparent;
+}
+
+/* When News & Press is the active section, highlight the parent */
+.navbar .nav > li.dropdown.active > a.dropdown-toggle {
+  background: rgba(149,210,179,0.15);
+  color: #fff;
+}
+
+/* Mobile: dropdown becomes an inline expanded list on tap */
+@media (max-width: 767px) {
+  .navbar .dropdown-menu {
+    background: rgba(30,70,80,0.35);
+    box-shadow: none;
+    border-top: none;
+    border-radius: 0;
+    padding: 4px 0 6px 12px;
+    margin: 0 0 4px 0;
+  }
+}
+
+/* Prevent horizontal scroll site-wide on mobile */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Keep the nav container from spilling out on small screens */
+/* .navbar-titans .container-fluid { overflow: hidden; } */
+
+/* On mobile, the dropdown-menu shouldn't try to be a floating panel — 
+   it should behave like a nested list inside the collapsed nav */
+@media (max-width: 767px) {
+  .navbar-titans .navbar-collapse {
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .navbar-titans .dropdown-menu {
+    position: static !important;
+    float: none;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+    border-top: none;
+    background: rgba(30,70,80,0.4);
+    margin: 0;
+    padding: 4px 0 6px 12px;
+  }
+  .navbar-titans .dropdown-menu > li > a {
+    color: #e5eef1 !important;
+  }
+  /* Keep the "News & Press" caret hidden on mobile — the whole row taps to expand */
+  .navbar-titans .dropdown-toggle .fa-caret-down {
+    float: right;
+    margin-top: 4px;
+  }
+  /* External link on its own line, not squeezed */
+  .navbar-titans .nav-external > a {
+    white-space: normal;
+  }
+}
+

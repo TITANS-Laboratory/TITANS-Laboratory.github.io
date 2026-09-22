@@ -379,8 +379,12 @@ window.copyDoi = function (btn) {
       navEl.outerHTML = window.NAV_HTML;
       const page = (location.pathname.split("/").pop() || "index.html").split("?")[0];
       const link = document.querySelector(`nav.navbar a[href="${page}"]`);
-      if (link && link.parentElement.tagName === "LI") {
-        link.parentElement.classList.add("active");
+      if (link) {
+        const li = link.closest("li");
+        if (li) li.classList.add("active");
+        // If this link is inside a dropdown, also mark the parent .dropdown li as active
+        const parentDropdown = link.closest("li.dropdown");
+        if (parentDropdown && parentDropdown !== li) parentDropdown.classList.add("active");
       }
     }
 
