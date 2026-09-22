@@ -15,18 +15,18 @@ window.GRANTS = [
       "display": "NSF Award #2637735"
     }
   },
-//   {
-//     "title": "AGORA: An Agentic-AI Open Red-team & Assurance Community Lab",
-//     "agency": "IEEE Computer Society (Emerging Technology Grants Program)",
-//     "role":   "Principal Investigator (PI)",
-//     "year":   "Aug 2026 – Dec 2027",
-//     "amount": "25,000 USD",
-//     "description": "Hands-on community lab where students and IEEE members build, attack, and harden autonomous AI agents, producing an open-source agent-security testbed and curriculum for a brand-new attack surface no existing program teaches.",
-//     // "link": {
-//     //   "url": "https://agora-ieee.netlify.app/",
-//     //   "display": "AGORA Project Site"
-//     // }
-// },
+  {
+    "title": "AGORA: An Agentic-AI Open Red-team & Assurance Community Lab",
+    "agency": "IEEE Computer Society (Emerging Technology Grants Program)",
+    "role":   "Principal Investigator (PI)",
+    "year":   "Aug 2026 – Dec 2027",
+    "amount": "25,000 USD",
+    "description": "Hands-on community lab to build, attack, and harden autonomous AI agents, producing an open-source agent-security testbed and curriculum for a brand-new attack surface.",
+    // "link": {
+    //   "url": "https://agora-ieee.netlify.app/",
+    //   "display": "AGORA Project Site"
+    // }
+},
   {
     "title": "SplitMind: Multimodal AI via Split Learning for Privacy-Critical Visual Intelligence",
     "agency": "NSF National Artificial Intelligence Research Resource (NAIRR) Pilot",
@@ -36,7 +36,7 @@ window.GRANTS = [
     "type":   "resource",             // ← new — flips chip to mint + chip icon
     "description": "Resource allocation on NCSA Delta supercomputer for privacy-preserving multimodal AI research.",
     "link": {
-      "url": "https://nairrpilot.org/",
+      "url": "https://nairrpilot.org/projects/awarded?_requestNumber=NAIRR260054",
       "display": "NAIRR Pilot #NAIRR260054"
     }
   },

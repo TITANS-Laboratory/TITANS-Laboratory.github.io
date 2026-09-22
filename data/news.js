@@ -48,6 +48,15 @@ window.NEWS = [
   },
   {
     "date": "August 2026",
+    "headline": `TITANS Lab received a $25K IEEE Computer Society Emerging Technology Grant, where Dr. Khalil served as the PI.`,
+    "body": `Dr. Khalil received a $25,000 grant from the <b>IEEE Computer Society Emerging Technology Grants Program</b> as the Principal Investigator (PI) for the project <b>"AGORA: An Agentic-AI Open Red-team & Assurance Community Lab"</b>. The funding, running from August 2026 through December 2027, will support a hands-on community lab where students and IEEE members build, attack, and harden autonomous AI agents: producing an open-source agent-security testbed and curriculum for an attack surface no existing program teaches.`,
+    // "thumbnail": "ieee_cs_logo.png",
+    "images": [
+      { "src": "ieee_cs_logo.png",  "position": "left",  "caption": "" }
+    ]
+  },
+  {
+    "date": "August 2026",
     "headline": `Our work on LLM-Split Learning for heterogeneous mental health surveys is accepted at <a href="https://healthcom2026.ieee-healthcom.org/" target="_blank" rel="noopener">IEEE HealthCom 2026</a>. Congratulations Khalid!`,
     "body": `The paper <b>"LLM-Based Schema-Aware Split Learning for Privacy-Preserving Mental Distress Prediction Across Heterogeneous Surveys"</b> by Md Khalid Syfullah and Dr. Khalil has been accepted at the <a href="https://healthcom2026.ieee-healthcom.org/" target="_blank" rel="noopener">2026 IEEE International Conference on E-Health Networking, Applications and Services (IEEE HealthCom 2026)</a>. The work proposes a schema-aware split learning framework that leverages large language models to enable privacy-preserving mental distress prediction across surveys with heterogeneous structures. Congratulations Khalid!`
   },
