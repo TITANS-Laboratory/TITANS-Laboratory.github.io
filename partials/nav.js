@@ -5,7 +5,7 @@
   const NAV_ITEMS = [
     { href: "index.html",        label: "Home" },
     {
-      label: "Team & Openings",
+      label: "People",
       children: [
         { href: "team.html",     label: "Team",     icon: "fa-users" },
         { href: "openings.html", label: "Openings", icon: "fa-briefcase" }
@@ -15,12 +15,12 @@
     { href: "publications.html", label: "Publications" },
     // { href: "equipment.html",    label: "Lab & Equipment" },
     {
-      label: "News & Press",
-      children: [
-        { href: "allnews.html", label: "News",  icon: "fa-newspaper-o" },
-        { href: "press.html",   label: "Press", icon: "fa-star" }
-      ]
-    }
+  label: "News",
+  children: [
+    { href: "allnews.html", label: "Lab News",     icon: "fa-newspaper-o" },
+    { href: "press.html",   label: "Press Coverage", icon: "fa-star" }
+  ]
+}
   ];
 
   const EXTERNAL_ITEMS = [
