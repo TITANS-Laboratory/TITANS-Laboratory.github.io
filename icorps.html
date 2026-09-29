@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- ============ PAGE METADATA (Section 0) ============ -->
+  <title>NSF I-Corps Project | Automated AI Reliability Evaluation Platform</title>
+  <meta name="description" content="NSF National I-Corps Teams project at Southern Illinois University Carbondale exploring the translation potential of an automated platform that evaluates the reliability of AI systems.">
+  <meta name="keywords" content="trustworthy AI, AI reliability, AI model evaluation, responsible AI, NSF I-Corps, customer discovery, SIU School of Computing">
+  <meta name="author" content="TITANS Lab, School of Computing, Southern Illinois University Carbondale">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="NSF I-Corps Project | Automated AI Reliability Evaluation Platform">
+  <meta property="og:description" content="NSF National I-Corps Teams project at Southern Illinois University Carbondale exploring an automated platform that evaluates the reliability of AI systems.">
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://titans-laboratory.github.io/favicon.ico">
+
+  <!-- Same external assets the host site uses, so type + icons match exactly -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic">
+
+  <style>
+    /* =====================================================================
+       TITANS Lab design tokens (ported from the host site's style.css)
+       ---------------------------------------------------------------------
+       Dark teal   #2f5a65   Medium teal #538391   Hover teal #3e6975
+       Mint accent #95D2B3   Tint panels #f6fbfa / #f4f9f7 / #e5eef1
+       Borders     #d5e4e8 / #e5eef1     Body text #2a2a2a / #333 / #5a6d72
+       Font: Source Sans Pro
+       ===================================================================== */
+    :root{
+      --teal-dark:#2f5a65;
+      --teal:#538391;
+      --teal-hover:#3e6975;
+      --mint:#95D2B3;
+      --tint-1:#f6fbfa;
+      --tint-2:#f4f9f7;
+      --tint-3:#e5eef1;
+      --line:#d5e4e8;
+      --line-2:#e5eef1;
+      --ink:#2a2a2a;
+      --ink-soft:#5a6d72;
+      box-sizing:border-box;
+      padding-top:env(safe-area-inset-top,0px);
+    }
+    *,*::before,*::after{box-sizing:inherit;}
+    html{scroll-behavior:smooth;scroll-padding-top:64px;}
+    html,body{overflow-x:hidden;max-width:100%;}
+    body{
+      margin:0;
+      padding-top:0;
+      font-family:"Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink);
+      line-height:1.6;
+      background:#fff;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:var(--teal);text-decoration:none;transition:color .2s;}
+    a:hover{color:var(--teal-hover);}
+    img{max-width:100%;height:auto;}
+    h1,h2,h3,h4{color:var(--teal-dark);font-weight:700;}
+
+    .wrap{max-width:1100px;margin:0 auto;padding:0 20px;}
+    .wrap-wide{max-width:1200px;margin:0 auto;padding:0 20px;}
+
+    /* -------------------- HERO -------------------- */
+    .hero{
+      background:linear-gradient(135deg,#2f5a65 0%,#3e6975 45%,#538391 100%);
+      color:#fff;position:relative;overflow:hidden;border-bottom:3px solid var(--mint);
+    }
+    .hero::before{ /* subtle abstract node texture */
+      content:"";position:absolute;inset:0;opacity:.22;
+      background-image:radial-gradient(circle at 82% 22%,rgba(149,210,179,.9) 0 2px,transparent 3px),
+        radial-gradient(circle at 92% 60%,rgba(255,255,255,.6) 0 2px,transparent 3px),
+        radial-gradient(circle at 70% 78%,rgba(149,210,179,.7) 0 2px,transparent 3px),
+        radial-gradient(circle at 60% 30%,rgba(255,255,255,.4) 0 1.5px,transparent 3px);
+      background-size:cover;
+    }
+    .hero-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:36px;align-items:center;padding:52px 20px;position:relative;z-index:1;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(149,210,179,.18);border:1px solid rgba(149,210,179,.5);color:#eafaf1;font-weight:600;font-size:.82em;letter-spacing:.4px;padding:6px 14px;border-radius:30px;margin-bottom:16px;}
+    .hero h1{color:#fff;font-size:2.15em;line-height:1.22;margin:0 0 14px;font-weight:700;}
+    .hero .tagline{font-size:1.25em;color:var(--mint);font-weight:600;margin:0 0 10px;}
+    .hero .support{color:#dfeef1;font-size:1em;margin:0 0 26px;max-width:56ch;}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:14px;}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:5px;font-weight:700;font-size:.98em;transition:transform .18s,background .2s,color .2s;border:none;cursor:pointer;}
+    .btn-mint{background:var(--mint);color:var(--teal-dark) !important;box-shadow:0 4px 12px rgba(0,0,0,.22);}
+    .btn-mint:hover{background:#fff;transform:translateY(-2px);}
+    .btn-ghost{background:transparent;color:#fff !important;border:2px solid rgba(255,255,255,.65);}
+    .btn-ghost:hover{background:rgba(255,255,255,.12);border-color:#fff;transform:translateY(-2px);}
+    .btn-teal{background:var(--teal);color:#fff !important;box-shadow:0 3px 8px rgba(47,90,101,.2);}
+    .btn-teal:hover{background:var(--teal-hover);transform:translateY(-2px);}
+
+    /* Abstract hero graphic (placeholder for the lab/team photo) */
+    .hero-figure{position:relative;z-index:1;}
+    .hero-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:24px;backdrop-filter:blur(2px);}
+    .gauge{display:block;margin:0 auto;}
+    .hero-dims{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px;}
+    .hero-dims span{font-size:.72em;text-align:center;color:#eafaf1;background:rgba(149,210,179,.15);border:1px solid rgba(149,210,179,.35);border-radius:6px;padding:6px 4px;font-weight:600;}
+    .hero-photo-note{font-size:.72em;color:rgba(255,255,255,.6);text-align:center;margin:12px 0 0;font-style:italic;}
+
+    @media (max-width:820px){
+      .hero-grid{grid-template-columns:1fr;gap:28px;padding:40px 20px;}
+      .hero h1{font-size:1.7em;}
+      .hero-figure{max-width:360px;margin:0 auto;}
+    }
+
+    /* -------------------- SUB / SECTION NAV -------------------- */
+    .subnav{position:sticky;top:0;z-index:900;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 6px rgba(47,90,101,.05);}
+    .subnav-inner{max-width:1200px;margin:0 auto;padding:0 12px;display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;}
+    .subnav a{white-space:nowrap;padding:12px 14px;font-size:.86em;font-weight:600;color:var(--ink-soft);border-bottom:3px solid transparent;}
+    .subnav a:hover{color:var(--teal);}
+    .subnav a.active{color:var(--teal-dark);border-bottom-color:var(--mint);}
+
+    /* -------------------- SECTIONS -------------------- */
+    section.block{padding:48px 0;}
+    section.alt{background:linear-gradient(180deg,#f4f9f7 0%,#e5eef1 100%);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+    .section-head{text-align:center;margin-bottom:30px;}
+    .section-head h2{font-size:1.8em;margin:0 0 10px;display:inline-block;padding-bottom:8px;border-bottom:3px solid var(--mint);}
+    .section-head p{color:var(--ink-soft);font-style:italic;margin:12px auto 0;max-width:70ch;}
+
+    .prose h3{font-size:1.22em;color:var(--teal-dark);margin:26px 0 6px;}
+    .prose h3 .lead-in{color:var(--teal);}
+    .prose p{margin:0 0 14px;color:#333;}
+    .prose .first-run{max-width:none;}
+
+    /* -------------------- FACT TABLE -------------------- */
+    .fact-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 4px 14px rgba(47,90,101,.06);}
+    .fact-table caption{caption-side:top;text-align:left;font-weight:700;color:var(--teal-dark);padding:0 0 12px;font-size:1.05em;}
+    .fact-table th,.fact-table td{text-align:left;padding:13px 18px;border-bottom:1px solid var(--line-2);vertical-align:top;font-size:.97em;}
+    .fact-table th{width:34%;background:var(--tint-1);color:var(--teal-dark);font-weight:700;}
+    .fact-table tr:last-child th,.fact-table tr:last-child td{border-bottom:none;}
+    .fact-table td a{font-weight:600;}
+    @media (max-width:640px){
+      .fact-table th,.fact-table td{display:block;width:100%;}
+      .fact-table th{border-bottom:none;padding-bottom:2px;}
+      .fact-table td{padding-top:2px;padding-bottom:14px;}
+    }
+
+    /* -------------------- PIPELINE FIGURE -------------------- */
+    .figure-wrap{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px;box-shadow:0 4px 16px rgba(47,90,101,.07);}
+    .gov-band{background:linear-gradient(135deg,#95D2B3 0%,#b6dfc7 100%);color:var(--teal-dark);text-align:center;font-weight:700;font-size:.9em;padding:10px 14px;border-radius:8px;margin-bottom:18px;}
+    .gov-band .fa{margin-right:6px;}
+    .pipeline{display:flex;align-items:stretch;gap:10px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;}
+    .stage{flex:1 1 0;min-width:150px;background:var(--tint-2);border:1px solid var(--line);border-top:4px solid var(--teal);border-radius:10px;padding:16px 14px;display:flex;flex-direction:column;}
+    .stage .stage-ico{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#538391 0%,#95D2B3 100%);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.05em;margin-bottom:10px;}
+    .stage h4{margin:0 0 6px;font-size:1.02em;color:var(--teal-dark);}
+    .stage p{margin:0;font-size:.85em;color:#4a5b60;line-height:1.45;}
+    .stage.modules{flex:1.6 1 0;background:#fff;}
+    .mod-list{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;}
+    .mod-list li{font-size:.82em;background:var(--tint-1);border:1px solid var(--line-2);border-left:3px solid var(--mint);border-radius:5px;padding:6px 9px;}
+    .mod-list li b{color:var(--teal-dark);}
+    .arrow{align-self:center;color:var(--teal);font-size:1.4em;flex:0 0 auto;padding:0 2px;}
+    .feedback{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px;padding:10px 14px;border:1px dashed var(--teal);border-radius:8px;color:var(--teal-dark);font-size:.88em;font-weight:600;background:var(--tint-1);}
+    .feedback .fa{color:var(--teal);}
+    .figure-caption{font-size:.86em;color:var(--ink-soft);font-style:italic;margin:16px 0 0;text-align:center;}
+    @media (max-width:760px){
+      .pipeline{flex-direction:column;overflow-x:visible;}
+      .stage{min-width:0;}
+      .arrow{transform:rotate(90deg);padding:4px 0;}
+    }
+
+    /* -------------------- TEAM -------------------- */
+    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;}
+    .member{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(47,90,101,.06);display:flex;flex-direction:column;}
+    .member .avatar{height:120px;background:linear-gradient(135deg,#2f5a65 0%,#538391 100%);display:flex;align-items:center;justify-content:center;position:relative;}
+    /* initials sit underneath as a fallback; the photo (if present) covers them */
+    .member .avatar .initials{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;background:var(--mint);color:var(--teal-dark);display:flex;align-items:center;justify-content:center;font-size:1.7em;font-weight:700;border:3px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.18);}
+    .member .avatar .headshot{position:relative;z-index:1;width:88px;height:88px;border-radius:50%;object-fit:cover;object-position:center;border:3px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.18);margin:0;}
+    .member .avatar .photo-tag{position:absolute;bottom:6px;right:8px;font-size:.62em;color:rgba(255,255,255,.7);font-style:italic;z-index:2;}
+    .member .body{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1;}
+    .member h3{margin:0 0 3px;font-size:1.18em;}
+    .member .role{display:inline-block;background:var(--tint-3);color:var(--teal-dark);font-weight:700;font-size:.76em;text-transform:uppercase;letter-spacing:.6px;padding:4px 10px;border-radius:20px;margin-bottom:12px;align-self:flex-start;}
+    .member .bio{font-size:.9em;color:#3f4f54;margin:0 0 14px;flex:1;}
+    .member .contact{font-size:.88em;margin:0 0 8px;}
+    .member .contact .fa{color:var(--teal);width:18px;}
+    .member .links{font-size:.82em;color:var(--ink-soft);border-top:1px solid var(--line-2);padding-top:10px;margin-top:auto;}
+    .member .links .fa{color:var(--teal);margin-right:4px;}
+
+
+    /* -------------------- PROGRESS -------------------- */
+    .progress-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px;box-shadow:0 4px 16px rgba(47,90,101,.06);max-width:820px;margin:0 auto;}
+    .prog-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px;}
+    .stat{text-align:center;background:var(--tint-2);border:1px solid var(--line);border-radius:10px;padding:18px 10px;}
+    .stat .num{font-size:2.4em;font-weight:700;color:var(--teal-dark);line-height:1;}
+    .stat .lbl{font-size:.84em;color:var(--ink-soft);margin-top:6px;}
+    .prog-label{display:flex;justify-content:space-between;font-size:.9em;font-weight:600;color:var(--teal-dark);margin-bottom:6px;}
+    .prog-bar{height:16px;background:var(--tint-3);border-radius:20px;overflow:hidden;border:1px solid var(--line);}
+    .prog-fill{height:100%;width:0;background:linear-gradient(90deg,#538391 0%,#95D2B3 100%);border-radius:20px;transition:width 1.2s ease;}
+    .prog-updated{font-size:.82em;color:var(--ink-soft);text-align:right;margin:8px 0 0;font-style:italic;}
+    .coming-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:26px;}
+    .coming{background:var(--tint-1);border:1px dashed var(--line);border-radius:10px;padding:18px;text-align:center;}
+    .coming h4{margin:0 0 8px;font-size:1em;color:var(--teal-dark);}
+    .coming .soon{display:inline-block;font-size:.72em;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--teal);background:var(--tint-3);border-radius:20px;padding:4px 12px;}
+    @media (max-width:520px){.prog-stats{grid-template-columns:1fr;}}
+
+    /* -------------------- GET INVOLVED -------------------- */
+    .involve-card{background:#fff;border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:12px;padding:28px;box-shadow:0 4px 16px rgba(47,90,101,.06);max-width:860px;margin:0 auto;}
+    .involve-card p.intro{font-size:1.05em;color:#333;margin-top:0;}
+    .involve-list{list-style:none;margin:18px 0 22px;padding:0;}
+    .involve-list li{position:relative;padding:6px 0 6px 30px;color:#3f4f54;font-size:.95em;}
+    .involve-list li .fa{position:absolute;left:0;top:9px;color:var(--teal);}
+    .involve-cta{text-align:center;margin-top:8px;}
+    .irb-note{font-size:.82em;color:var(--ink-soft);background:var(--tint-1);border:1px solid var(--line-2);border-radius:8px;padding:12px 16px;margin-top:20px;}
+    .irb-note .fa{color:var(--teal);margin-right:6px;}
+
+    /* -------------------- NEWS + GALLERY -------------------- */
+    .news-list{display:grid;gap:14px;max-width:900px;margin:0 auto;}
+    .news-item{display:flex;align-items:flex-start;gap:14px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;transition:box-shadow .2s,transform .2s;}
+    .news-item:hover{box-shadow:0 6px 16px rgba(47,90,101,.12);transform:translateY(-2px);}
+    .news-item .ico{flex:0 0 auto;width:42px;height:42px;border-radius:8px;background:var(--tint-3);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:1.15em;}
+    .news-item .txt{flex:1;}
+    .news-item .txt h4{margin:0 0 4px;font-size:1.02em;}
+    .news-item .txt .src{font-size:.83em;color:var(--ink-soft);}
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:34px;}
+    .gtile{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 3px 12px rgba(47,90,101,.06);}
+    .gtile .ph{aspect-ratio:4/3;background:linear-gradient(135deg,#e5eef1 0%,#d5e4e8 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--teal);gap:8px;}
+    .gtile .ph .fa{font-size:2em;opacity:.75;}
+    .gtile .ph small{font-size:.72em;color:var(--ink-soft);font-style:italic;}
+    .gtile figcaption{padding:12px 14px;font-size:.85em;color:#41525a;}
+
+    /* -------------------- ACKNOWLEDGMENT -------------------- */
+    .ack-box{background:var(--tint-1);border:1px solid var(--line);border-left:5px solid var(--mint);border-radius:10px;padding:22px 26px;max-width:960px;margin:0 auto;}
+    .ack-box .nsf-mark{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--teal-dark);margin-bottom:10px;}
+    .ack-box .nsf-mark .fa{color:var(--teal);}
+    .ack-box p{margin:0;color:#3f4f54;font-size:.95em;}
+    .logo-note{font-size:.8em;color:var(--ink-soft);margin-top:14px;font-style:italic;}
+
+    /* -------------------- CONTACT -------------------- */
+    .contact-card{max-width:760px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px;box-shadow:0 4px 16px rgba(47,90,101,.06);}
+    .contact-card ul{list-style:none;margin:0;padding:0;}
+    .contact-card li{display:flex;gap:12px;padding:8px 0;font-size:.96em;color:#3f4f54;}
+    .contact-card li .fa{color:var(--teal);width:20px;text-align:center;margin-top:4px;}
+
+    /* -------------------- FOOTER (matches host site) -------------------- */
+    .site-footer{background:linear-gradient(180deg,#2f5a65 0%,#234750 100%);color:#d5e4e8;border-top:3px solid var(--mint);margin-top:0;}
+    .footer-main{max-width:1200px;margin:0 auto;padding:34px 20px 10px;}
+    .footer-row{display:grid;grid-template-columns:2fr 1.6fr 1.2fr;gap:26px;}
+    .footer-col a{color:var(--mint);}
+    .footer-col a:hover{color:#fff;}
+    .footer-brand-text{color:#fff;font-size:1.5em;font-weight:700;margin:0 0 12px;}
+    .footer-about{color:#b8cdd2;font-size:.9em;line-height:1.6;margin:0 0 16px;}
+    .footer-social{display:flex;gap:10px;}
+    .footer-social a{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.08);color:#95D2B3;transition:.2s;}
+    .footer-social a:hover{background:var(--mint);color:var(--teal-dark);transform:translateY(-2px);}
+    .footer-heading{color:#fff;font-size:1em;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 16px;position:relative;padding-bottom:8px;}
+    .footer-heading::after{content:"";position:absolute;left:0;bottom:0;width:40px;height:2px;background:var(--mint);}
+    .footer-contact{list-style:none;padding:0;margin:0;}
+    .footer-contact li{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;color:#b8cdd2;font-size:.9em;}
+    .footer-contact li .fa{color:var(--mint);width:18px;text-align:center;margin-top:3px;}
+    .footer-siuc{text-align:center;}
+    .footer-siuc img{max-height:110px;width:auto;margin:4px 0 8px;}
+    .footer-ack{max-width:1200px;margin:0 auto;padding:6px 20px 20px;}
+    .footer-ack .box{background:rgba(0,0,0,.16);border:1px solid rgba(149,210,179,.22);border-radius:8px;padding:16px 18px;font-size:.83em;color:#cfe0e4;line-height:1.6;}
+    .footer-bottom{background:rgba(0,0,0,.2);padding:16px 0;border-top:1px solid rgba(149,210,179,.15);}
+    .footer-bottom .wrap-wide{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+    .footer-bottom p{margin:0;color:#9fb7bd;font-size:.85em;}
+    .footer-bottom a{color:var(--mint);}
+    @media (max-width:820px){.footer-row{grid-template-columns:1fr;}.footer-siuc{text-align:left;}}
+
+    /* back to top */
+    .to-top{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(47,90,101,.35);opacity:0;pointer-events:none;transition:opacity .3s,transform .2s;z-index:800;padding-bottom:env(safe-area-inset-bottom,0px);}
+    .to-top.show{opacity:1;pointer-events:auto;}
+    .to-top:hover{background:var(--teal-hover);color:#fff;transform:translateY(-2px);}
+
+    @media (prefers-reduced-motion:reduce){
+      *{scroll-behavior:auto !important;transition:none !important;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Site navigation intentionally omitted — the host site supplies its own. -->
+
+<!-- ===================== 1. HERO ===================== -->
+<header class="hero" id="top">
+  <div class="hero-grid wrap-wide">
+    <div class="hero-copy">
+      <span class="hero-eyebrow"><i class="fa fa-flask"></i> NSF National I-Corps Teams &middot; Fall Cohort 3</span>
+      <h1>I-Corps: Translation Potential of an Automated Artificial Intelligence (AI) Reliability Evaluation Platform</h1>
+      <p class="tagline">Automated, standardized evaluation of AI system reliability.</p>
+      <p class="support">Supported by the U.S. National Science Foundation through the National I-Corps Teams program.</p>
+      <div class="hero-actions">
+        <a class="btn btn-mint" href="https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2637735" target="_blank" rel="noopener"><i class="fa fa-university"></i> View the NSF award</a>
+      </div>
+    </div>
+
+    <!-- Abstract graphic placeholder for the team/lab photo (see BUILDER NOTE) -->
+    <!-- BUILDER NOTE: replace this .hero-figure block with the professional photo of the
+         PI and students at the screen, e.g.
+         <img src="images/.../lab_photo.jpg" alt="Dr. Alvi Ataur Khalil reviews the AI reliability evaluation platform with students in his office."> -->
+    <div class="hero-figure" aria-hidden="true">
+      <div class="hero-card">
+        <svg class="gauge" width="200" height="120" viewBox="0 0 200 120" role="img" aria-label="Illustration of a reliability score gauge">
+          <path d="M20 110 A80 80 0 0 1 180 110" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="16" stroke-linecap="round"/>
+          <path d="M20 110 A80 80 0 0 1 165 62" fill="none" stroke="#95D2B3" stroke-width="16" stroke-linecap="round"/>
+          <text x="100" y="98" text-anchor="middle" fill="#fff" font-size="30" font-weight="700" font-family="Source Sans Pro, sans-serif">Score</text>
+          <text x="100" y="116" text-anchor="middle" fill="#dfeef1" font-size="11" font-family="Source Sans Pro, sans-serif">one interpretable measure</text>
+        </svg>
+        <div class="hero-dims">
+          <span>Robustness</span><span>Privacy</span><span>Fairness</span>
+          <span>Transparency</span><span>Accountability</span><span>+ Report</span>
+        </div>
+        <p class="hero-photo-note">Illustrative graphic</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== ON-PAGE NAV ===================== -->
+<nav class="subnav" id="subnav" aria-label="On this page">
+  <div class="subnav-inner">
+    <a href="#about">About</a>
+    <a href="#team">Team</a>
+    <a href="#platform">Platform</a>
+    <a href="#discovery">Progress</a>
+    <a href="#involved">Talk with us</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ===================== PROJECT OVERVIEW ===================== -->
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>About the project</h2>
+    </div>
+    <div class="prose">
+      <h3><span class="lead-in">The problem.</span></h3>
+      <p>Artificial intelligence (AI) systems increasingly inform consequential decisions in education, healthcare, finance, and other fields. Today there is no efficient, standardized way to confirm that an AI model is reliable, fair, and safe before it is deployed. Checking is done manually, with fragmented and disconnected tools and no common measure of reliability. Errors or unfairness can affect large numbers of people who have no visibility into how these systems were validated.</p>
+
+      <h3><span class="lead-in">The technology.</span></h3>
+      <p>The team is developing an automated, domain-aware platform that evaluates the reliability of AI systems before deployment. It combines a multi-dimensional assessment pipeline with a weighted scoring framework. The platform evaluates a model across five dimensions &mdash; robustness, privacy, fairness, transparency, and accountability &mdash; and normalizes these signals into a single interpretable reliability score. The output includes a risk breakdown and clear recommendations. The goal is to make reliability evaluation faster, standardized, and accessible to people who are not specialists in each risk area.</p>
+
+      <h3><span class="lead-in">What makes it different.</span></h3>
+      <p>Current approaches fall into three groups: manual self-assessment frameworks, high-level governance guidelines, and single-property technical toolkits that address only one concern. The platform aims to unify these needs by translating legal, ethical, and governance requirements into measurable technical tests and combining them into one repeatable, auditable measure that can be re-run as systems are updated.</p>
+
+      <h3><span class="lead-in">What this I-Corps project does.</span></h3>
+      <p>This project uses experiential learning and first-hand investigation of the industry ecosystem to assess the translation potential of the technology. Through the NSF National I-Corps Teams curriculum, the team is conducting at least 100 customer discovery interviews with potential customers and partners. The interviews test hypotheses about customer segments, value propositions, and adoption barriers, and they support an evidence-based decision about the technology's path forward.</p>
+
+      <h3><span class="lead-in">Potential impact.</span></h3>
+      <p>The technology may reduce the time and cost of validating AI systems and support the responsible adoption of AI across sectors, including education, where the reliability and fairness of AI tools directly affect students.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 5. TEAM ===================== -->
+<section class="block alt" id="team">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Project team</h2>
+      <p>A three-person team combining technical expertise, customer discovery, and commercialization experience.</p>
+    </div>
+
+    <div class="team-grid">
+
+      <!-- TO ADD A PHOTO: save the file (e.g. in images/team/) and point src at it.
+           Keep class="headshot" and a descriptive alt. If the file is missing,
+           onerror removes the <img> and the initials show instead. -->
+      <article class="member">
+        <div class="avatar"><img class="headshot" src="images/teampic/Alvi1.jpeg" alt="Headshot of Dr. Alvi Ataur Khalil" onerror="this.remove()"><span class="initials">AK</span></div>
+        <div class="body">
+          <h3>Alvi Ataur Khalil, PhD</h3>
+          <span class="role">Principal Investigator &amp; Technical Lead</span>
+          <p class="bio">Assistant Professor of Computer Science in the School of Computing at Southern Illinois University Carbondale and director of the TITANS Laboratory. He is the primary inventor of the platform and designed its evaluation methodology. His research spans trustworthy AI, machine-learning security, and dependable distributed systems, with more than 20 peer-reviewed publications and a granted U.S. patent.</p>
+          <p class="contact"><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:a.khalil@siu.edu">a.khalil@siu.edu</a></p>
+        </div>
+      </article>
+
+      <article class="member">
+        <div class="avatar"><img class="headshot" src="images/teampic/Khalid1.jpg" alt="Headshot of Md Khalid Syfullah" onerror="this.remove()"><span class="initials">KS</span></div>
+        <div class="body">
+          <h3>Md Khalid Syfullah</h3>
+          <span class="role">Entrepreneurial Lead</span>
+          <p class="bio">PhD student in Computer Science at Southern Illinois University Carbondale. He contributed to the system architecture and evaluation framework, and he led the team's 32 customer discovery interviews in the Spring 2026 regional I-Corps program. In the national program he leads day-to-day customer discovery, including scheduling and conducting interviews and synthesizing what the team learns.</p>
+          <p class="contact"><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:mdkhalid.syfullah@siu.edu">mdkhalid.syfullah@siu.edu</a></p>
+        </div>
+      </article>
+
+      <article class="member">
+        <div class="avatar"><img class="headshot" src="images/team/daniel-greening.jpg" alt="Headshot of Dr. Daniel Greening" onerror="this.remove()"><span class="initials">DG</span></div>
+        <div class="body">
+          <h3>Daniel Greening, PhD</h3>
+          <span class="role">Industry Mentor</span>
+          <p class="bio">Computer scientist, serial entrepreneur, and technology executive. He holds a PhD in Computer Science from UCLA and has founded and led multiple technology companies and held senior engineering leadership roles at organizations including Macromedia and Citrix Online. He advises the team on customer discovery, commercialization strategy, and reaching the right interviewees.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 4. HOW THE TECHNOLOGY WORKS ===================== -->
+<section class="block" id="platform">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The platform at a glance</h2>
+      <p>The platform follows a simple pipeline. This overview is intentionally high level.</p>
+    </div>
+
+    <div class="figure-wrap">
+      <div class="gov-band"><i class="fa fa-balance-scale" aria-hidden="true"></i> Governance requirements (for example, the EU AI Act and the NIST AI Risk Management Framework)</div>
+
+      <div class="pipeline">
+        <div class="stage">
+          <div class="stage-ico"><i class="fa fa-sign-in" aria-hidden="true"></i></div>
+          <h4>Intake &amp; profiling</h4>
+          <p>Collects basic information about the AI system and its deployment context, and determines which checks apply.</p>
+        </div>
+
+        <div class="arrow" aria-hidden="true"><i class="fa fa-arrow-right"></i></div>
+
+        <div class="stage modules">
+          <div class="stage-ico"><i class="fa fa-cogs" aria-hidden="true"></i></div>
+          <h4>Automated evaluation modules</h4>
+          <p>Five parallel modules, one per dimension:</p>
+          <ul class="mod-list">
+            <li><b>Robustness</b> &mdash; resilience to manipulated or perturbed inputs</li>
+            <li><b>Privacy</b> &mdash; signs of information leakage</li>
+            <li><b>Fairness</b> &mdash; outcome differences across groups</li>
+            <li><b>Transparency</b> &mdash; consistency of explanations</li>
+            <li><b>Accountability</b> &mdash; logging, traceability, and human oversight</li>
+          </ul>
+        </div>
+
+        <div class="arrow" aria-hidden="true"><i class="fa fa-arrow-right"></i></div>
+
+        <div class="stage">
+          <div class="stage-ico"><i class="fa fa-sliders" aria-hidden="true"></i></div>
+          <h4>Scoring layer</h4>
+          <p>Normalizes and combines the results into dimension-level scores and one composite reliability score, with domain-adjustable weights.</p>
+        </div>
+
+        <div class="arrow" aria-hidden="true"><i class="fa fa-arrow-right"></i></div>
+
+        <div class="stage">
+          <div class="stage-ico"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+          <h4>Reporting</h4>
+          <p>Produces an audit-ready, human-readable report with a risk breakdown and recommendations.</p>
+        </div>
+      </div>
+
+      <div class="feedback">
+        <i class="fa fa-refresh" aria-hidden="true"></i>
+        Optional continuous monitoring &mdash; re-runs the evaluation as models are updated or retrained (feedback from reporting back to intake).
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== 7. CUSTOMER DISCOVERY PROGRESS ===================== -->
+<section class="block" id="discovery">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Customer discovery progress</h2>
+      <p>Customer discovery is the core activity of the I-Corps program. The team is speaking with practitioners and organizations to learn how AI systems are evaluated today and what would make a better approach useful. Results are reported only in aggregate.</p>
+    </div>
+
+    <div class="progress-card">
+      <div class="prog-stats">
+        <div class="stat">
+          <div class="num" id="natCount">0</div>
+          <div class="lbl">Interviews completed in the national program (target 100+)</div>
+        </div>
+        <div class="stat">
+          <div class="num">32</div>
+          <div class="lbl">Interviews completed in the regional program</div>
+        </div>
+      </div>
+
+      <div class="prog-label"><span>National program progress</span><span id="natPct">0 / 100+</span></div>
+      <div class="prog-bar"><div class="prog-fill" id="natBar" data-target="0"></div></div>
+      <p class="prog-updated">Last updated: September 28, 2026</p>
+
+      <!-- BUILDER NOTE: update #natCount, #natBar data-target (percent of 100), and #natPct
+           as the cohort progresses. Fill in the blocks below after December 2026. -->
+      <div class="coming-grid">
+        <div class="coming"><h4>Key lessons learned</h4><span class="soon">Coming soon</span></div>
+        <div class="coming"><h4>Hypotheses tested</h4><span class="soon">Coming soon</span></div>
+        <div class="coming"><h4>Lessons Learned presentation</h4><span class="soon">December 2026</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 8. GET INVOLVED ===================== -->
+<section class="block alt" id="involved">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Talk with us</h2>
+    </div>
+    <div class="involve-card">
+      <p class="intro">Do you build, deploy, evaluate, or oversee AI systems? We would like to hear how your team checks whether AI systems are reliable, fair, and safe today, and where the process is difficult.</p>
+      <ul class="involve-list">
+        <li><i class="fa fa-check" aria-hidden="true"></i> We are not selling anything. These are customer discovery conversations.</li>
+        <li><i class="fa fa-check" aria-hidden="true"></i> Conversations take about 20 to 30 minutes by video call or phone, at a time that suits you.</li>
+        <li><i class="fa fa-check" aria-hidden="true"></i> Participation is voluntary. You may decline any question or stop at any time.</li>
+        <li><i class="fa fa-check" aria-hidden="true"></i> What you share is kept confidential and reported only in summary form combined with what we learn from others.</li>
+        <li><i class="fa fa-check" aria-hidden="true"></i> Participation is open to adults (18 and older).</li>
+      </ul>
+      <div class="involve-cta">
+        <a class="btn btn-teal" href="mailto:a.khalil@siu.edu?subject=I-Corps%20customer%20discovery%20conversation"><i class="fa fa-envelope"></i> Email us to schedule a conversation</a>
+      </div>
+
+      <!-- BUILDER NOTE: confirm whether to display the IRB line below before publishing. -->
+      <p class="irb-note"><i class="fa fa-shield" aria-hidden="true"></i> This activity was reviewed by SIU's Office of Research Compliance (Protocol 26137) and determined not to fall under IRB oversight.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 9. NEWS & MEDIA ===================== -->
+<section class="block" id="news">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>News</h2>
+    </div>
+
+    <div class="news-list">
+      <a class="news-item" href="https://soc.siu.edu/news/articles/09-04-2026.php" target="_blank" rel="noopener">
+        <span class="ico"><i class="fa fa-newspaper-o" aria-hidden="true"></i></span>
+        <span class="txt">
+          <h4>School of Computing Faculty Awarded NSF National I-Corps Grant to Advance AI Reliability Technology</h4>
+          <span class="src">SIU School of Computing &middot; September 4, 2026 <i class="fa fa-external-link" aria-hidden="true"></i></span>
+        </span>
+      </a>
+
+      <!-- BUILDER NOTE: add the LinkedIn post link and TITANS Lab LinkedIn post link when available. -->
+    </div>
+
+
+  </div>
+</section>
+
+
+
+<!-- ===================== 11. CONTACT ===================== -->
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Contact</h2>
+    </div>
+    <div class="contact-card">
+      <ul>
+        <li><i class="fa fa-user" aria-hidden="true"></i> <span><strong>Principal Investigator:</strong> Alvi Ataur Khalil, Assistant Professor, School of Computing, Southern Illinois University Carbondale</span></li>
+        <li><i class="fa fa-envelope" aria-hidden="true"></i> <span><a href="mailto:a.khalil@siu.edu">a.khalil@siu.edu</a></span></li>
+        <li><i class="fa fa-flask" aria-hidden="true"></i> <span><strong>Lab:</strong> Transformative Innovation for Trustworthy AI and Network Security (TITANS) Laboratory</span></li>
+        <li><i class="fa fa-map-marker" aria-hidden="true"></i> <span>School of Computing, 1263 Lincoln Drive, Carbondale, IL 62901, USA</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 12. FOOTER (matches host site) ===================== -->
+<footer class="site-footer" id="footer">
+  <div class="footer-main">
+    <div class="footer-row">
+      <div class="footer-col">
+        <h4 class="footer-brand-text">TITANS Lab</h4>
+        <p class="footer-about">Transformative Innovation for Trustworthy AI and Network Security, part of the
+          <a href="https://soc.siu.edu/" target="_blank" rel="noopener">School of Computing</a>
+          at <a href="https://siu.edu/" target="_blank" rel="noopener">Southern Illinois University Carbondale</a>.
+        </p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/titanslab" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+          <a href="https://siu.edu/" target="_blank" rel="noopener" aria-label="SIU Carbondale" title="SIU Carbondale"><i class="fa fa-university" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5 class="footer-heading">Contact</h5>
+        <ul class="footer-contact">
+          <li><i class="fa fa-map-marker" aria-hidden="true"></i><span>School of Computing, 1263 Lincoln Drive, Carbondale, IL 62901, USA</span></li>
+          <li><i class="fa fa-envelope" aria-hidden="true"></i><span><a href="mailto:a.khalil@siu.edu">a.khalil@siu.edu</a></span></li>
+          <li><i class="fa fa-phone" aria-hidden="true"></i><span>(618) 453-2121</span></li>
+          <li><i class="fa fa-external-link" aria-hidden="true"></i><span><a href="https://maps.app.goo.gl/1yqBawNFoiHEd8Kn6" target="_blank" rel="noopener">Maps</a> &middot; <a href="https://siu.edu/contact-us/" target="_blank" rel="noopener">SIU Contacts</a></span></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-siuc">
+        <h5 class="footer-heading">Affiliated with</h5>
+        <a href="https://siu.edu/" target="_blank" rel="noopener">
+          <img src="https://titans-laboratory.github.io/images/logopic/siuc.png" alt="Southern Illinois University Carbondale">
+        </a>
+      </div>
+    </div>
+  </div>
+
+ 
+
+  <div class="footer-bottom">
+    <div class="wrap-wide">
+      <p>&copy; <span id="year">2026</span> TITANS Lab. All rights reserved.</p>
+      <p>Last updated: September 28, 2026</p>
+    </div>
+  </div>
+</footer>
+
+<a href="#top" class="to-top" id="toTop" aria-label="Back to top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+
+<script>
+(function(){
+  // ---- Footer year ----
+  var yearEl=document.getElementById('year');
+  if(yearEl) yearEl.textContent=new Date().getFullYear();
+
+  // ---- Back to top ----
+  var toTop=document.getElementById('toTop');
+  if(toTop){
+    window.addEventListener('scroll',function(){
+      if(window.scrollY>500) toTop.classList.add('show'); else toTop.classList.remove('show');
+    },{passive:true});
+  }
+
+  // ---- Animate progress bar when it scrolls into view ----
+  var bar=document.getElementById('natBar');
+  if(bar){
+    var pct=parseInt(bar.getAttribute('data-target'),10)||0;
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ bar.style.width=pct+'%'; io.disconnect(); } });
+    },{threshold:.3});
+    io.observe(bar);
+  }
+
+  // ---- Sub-nav active highlighting ----
+  var subnavInner=document.querySelector('.subnav-inner');
+  var links=Array.prototype.slice.call(document.querySelectorAll('.subnav a'));
+  var sections=links.map(function(a){return document.querySelector(a.getAttribute('href'));}).filter(Boolean);
+  var lastActive=null;
+  function onScroll(){
+    var pos=window.scrollY+140,cur=null;
+    sections.forEach(function(s){ if(s.offsetTop<=pos) cur=s.id; });
+    links.forEach(function(a){ a.classList.toggle('active',a.getAttribute('href')==='#'+cur); });
+    // keep the active chip visible by scrolling ONLY the sub-nav bar itself
+    // (horizontal), never the page — this avoids hijacking page scroll.
+    var act=document.querySelector('.subnav a.active');
+    if(act && act!==lastActive && subnavInner){
+      lastActive=act;
+      var left=act.offsetLeft-(subnavInner.clientWidth/2)+(act.clientWidth/2);
+      subnavInner.scrollTo({left:left,behavior:'smooth'});
+    }
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>
